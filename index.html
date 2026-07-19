@@ -13,9 +13,23 @@ input[type=text],input[type=date],textarea,select{width:100%;border:1px solid #b
 button{border:0;border-radius:9px;padding:10px 12px;font-weight:800;cursor:pointer}.primary{background:var(--navy);color:#fff}.secondary{background:#eef2f6;color:#17202a;border:1px solid #cbd3dd}.warn{background:#fff4df;color:#6c4600;border:1px solid #dfc48a}
 .stage{display:flex;justify-content:center;padding:8px;overflow:auto}.card-wrap{width:3.375in}.card{width:3.375in;height:2.125in;background:var(--paper);border:1px solid #adb5bf;border-radius:.12in;overflow:hidden;position:relative;color:#111;box-shadow:0 4px 15px rgba(0,0,0,.2)}
 .card .header{height:.42in;background:var(--navy);color:#fff;padding:.08in .12in;display:flex;align-items:center;justify-content:space-between}.title{font-weight:900;font-size:13px;letter-spacing:.4px;line-height:1.05}.subtitle{font-size:7px;color:#eedba6;margin-top:3px}.logo{width:.28in;height:.28in;border-radius:50%;background:#fff;border:2px solid var(--gold);object-fit:cover}
-.body{display:grid;grid-template-columns:.78in minmax(0,1fr) .98in;gap:.055in;padding:.065in .075in .025in;height:1.36in;overflow:hidden}.body>div{min-width:0;overflow:hidden}.photo{width:.70in;height:.82in;border:1px solid #8f98a3;border-radius:.055in;object-fit:cover;background:#dde3ea}.field{font-size:6.25px;line-height:1.03;margin-bottom:2.3px;overflow-wrap:anywhere}.field b{display:block;font-size:5.25px;line-height:1;color:#3b4a5a;text-transform:uppercase;letter-spacing:.2px}.status{font-size:6.75px;font-weight:900;color:#0d3f73}.field span{display:block;max-height:2.1em;overflow:hidden}
-.notary-box{border:1px solid #718096;border-radius:.055in;padding:.042in;background:#fff;font-size:5.35px;line-height:1.06;overflow:hidden}.notary-box b{font-size:5px;line-height:1}.notary-box>div{margin-bottom:1.5px;max-height:1.2em;overflow:hidden}.line{border-bottom:1px solid #555;min-height:9px;margin:1px 0 3px}.signature-canvas{width:100%;height:.35in;border:1px dashed #6d7680;background:#fff;touch-action:none}.ink-box{height:.22in;border-bottom:1px solid #333;margin-top:2px;position:relative}.ink-box span{position:absolute;bottom:1px;left:2px;font-size:4.9px;color:#555}
-.footer{position:absolute;left:0;right:0;bottom:0;height:.23in;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 .1in;font-size:5.7px}.badge{color:#ffe69c;font-weight:900}.notice{position:absolute;left:.08in;right:.08in;bottom:.245in;height:.19in;font-size:5.25px;line-height:1.05;text-align:center;color:#29333d;overflow:hidden}.seal-img{width:.25in;height:.25in;border-radius:50%;object-fit:contain;border:1px solid #99a3ae;float:right}.hidden{display:none!important}.archive-list{max-height:220px;overflow:auto;border:1px solid #d5dbe3;border-radius:9px;margin-top:8px}.archive-item{padding:9px;border-bottom:1px solid #e4e8ee}.archive-item:last-child{border-bottom:0}.archive-item button{padding:6px 8px;margin:4px 4px 0 0}.security-box{border:1px solid #9aa7b7;border-radius:8px;padding:10px;background:#f7f9fb}.fingerprint{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;word-break:break-all;background:#eef2f6;padding:8px;border-radius:6px}.linked-chip{font-size:4.9px;line-height:1.05;border:1px solid #7d8996;border-radius:3px;padding:2px;margin-top:2px;background:#f8fafc;max-height:.26in;overflow:hidden}
+.body{display:grid;grid-template-columns:.76in minmax(0,1.19in) .98in;gap:.055in;padding:.06in .075in .02in;height:1.39in;overflow:hidden}
+.body>div{min-width:0;overflow:hidden}
+.photo{width:.69in;height:.82in;border:1px solid #8f98a3;border-radius:.055in;object-fit:cover;background:#dde3ea}
+.details{display:flex;flex-direction:column;gap:3px;min-width:0}
+.detail-row{display:grid;grid-template-columns:1fr 1fr;gap:5px;min-width:0}
+.detail-row.single{grid-template-columns:1fr}
+.field{font-size:6.15px;line-height:1.04;min-width:0;overflow:hidden}
+.field b{display:block;font-size:5.1px;line-height:1;color:#3b4a5a;text-transform:uppercase;letter-spacing:.18px;margin-bottom:1px}
+.field span{display:block;white-space:normal;overflow-wrap:anywhere;max-height:2.08em;overflow:hidden}
+.field.compact span{max-height:1.05em}
+.status{font-size:6.7px;font-weight:900;color:#0d3f73}
+.notary-box{border:1px solid #718096;border-radius:.055in;padding:.04in;background:#fff;font-size:5.15px;line-height:1.03;overflow:hidden;display:flex;flex-direction:column;gap:2px}
+.notary-box b{font-size:4.9px;line-height:1}
+.notary-row{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.notary-value{min-height:8px;max-height:1.15em;overflow:hidden}
+.line{border-bottom:1px solid #555;min-height:9px;margin:0 0 1px}.signature-canvas{width:100%;height:.35in;border:1px dashed #6d7680;background:#fff;touch-action:none}.ink-box{height:.22in;border-bottom:1px solid #333;margin-top:2px;position:relative}.ink-box span{position:absolute;bottom:1px;left:2px;font-size:4.9px;color:#555}
+.footer{position:absolute;left:0;right:0;bottom:0;height:.23in;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 .1in;font-size:5.7px}.badge{color:#ffe69c;font-weight:900}.notice{position:absolute;left:.08in;right:.08in;bottom:.29in;height:.13in;font-size:4.85px;line-height:1.03;text-align:center;color:#29333d;overflow:hidden}.seal-img{width:.25in;height:.25in;border-radius:50%;object-fit:contain;border:1px solid #99a3ae;float:right}.hidden{display:none!important}.archive-list{max-height:220px;overflow:auto;border:1px solid #d5dbe3;border-radius:9px;margin-top:8px}.archive-item{padding:9px;border-bottom:1px solid #e4e8ee}.archive-item:last-child{border-bottom:0}.archive-item button{padding:6px 8px;margin:4px 4px 0 0}.security-box{border:1px solid #9aa7b7;border-radius:8px;padding:10px;background:#f7f9fb}.fingerprint{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;word-break:break-all;background:#eef2f6;padding:8px;border-radius:6px}.linked-chip{position:absolute;left:.84in;right:1.07in;bottom:.43in;font-size:4.55px;line-height:1;border-top:1px solid #9aa5b1;padding-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.linked-chip.empty{display:none}
 @media(max-width:950px){.app{grid-template-columns:1fr}}@media print{body{background:#fff}.controls,.no-print{display:none!important}.app{display:block;padding:0}.panel{border:0;box-shadow:none;padding:0}.stage{padding:0}.card-wrap{width:3.375in}.card{box-shadow:none;border:.3pt solid #999}@page{size:3.375in 2.125in;margin:0}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
@@ -37,7 +51,7 @@ button{border:0;border-radius:9px;padding:10px 12px;font-weight:800;cursor:point
 <label>Card / declaration number<input id="cardNo" type="text" value="ON-DC-2026-000001"></label>
 <div class="grid2"><label>Issue date<input id="issueDate" type="date"></label><label>Review date<input id="reviewDate" type="date"></label></div>
 <label>Expiry wording<input id="expiryText" type="text" value="Upon status change or change in information"></label>
-<label>Declaration wording<textarea id="declarationText">I solemnly declare that the information shown on this card is true to the best of my knowledge and belief.</textarea></label>
+<label>Declaration wording<textarea id="declarationText">I solemnly declare that the information shown is true to the best of my knowledge and belief.</textarea></label>
 
 <h2>Linked ID and status evidence</h2>
 <div class="security-box">
@@ -74,10 +88,49 @@ button{border:0;border-radius:9px;padding:10px 12px;font-weight:800;cursor:point
 <div class="stage"><div class="card-wrap"><div class="card" id="card">
 <div class="header"><div><div class="title">ONTARIO DECLARATION CARD</div><div class="subtitle">STATUTORY DECLARATION OF IDENTITY &amp; MARITAL STATUS</div></div><img id="logoPreview" class="logo" alt="Optional seal"></div>
 <div class="body">
-<div><img id="photoPreview" class="photo" alt="Holder photo"><div class="ink-box"><span>Holder signature — sign in ink</span></div></div>
-<div><div class="field"><b>Full legal name</b><span id="vFullName"></span></div><div class="field"><b>Date of birth</b><span id="vDob"></span></div><div class="field"><b>Sex</b><span id="vSex"></span></div><div class="field"><b>Marital status</b><span class="status" id="vMarital"></span></div><div class="field"><b>Place of birth</b><span id="vBirthPlace"></span></div><div class="field"><b>Citizenship</b><span id="vCitizenship"></span></div><div class="field"><b>Occupation</b><span id="vOccupation"></span></div><div class="field"><b>Residence</b><span id="vAddress"></span></div><div class="linked-chip"><b>Linked record</b><span id="vLinked"></span><br><b>Fingerprint</b> <span id="vFingerprint"></span></div></div>
-<div class="notary-box"><img id="sealPreview" class="seal-img" alt=""><b>NOTARY / COMMISSIONER</b><div id="vNotaryName" class="line"></div><b>Capacity</b><div id="vCapacity"></div><b>Licence / appointment no.</b><div id="vLicence"></div><b>Appointment expiry</b><div id="vAppointmentExpiry"></div><b>Issue date</b><div id="vIssueDate"></div><b>Review date</b><div id="vReviewDate"></div><b>Notary signature</b><img id="sigPreview" style="width:100%;height:.28in;object-fit:contain;border-bottom:1px solid #555" alt="Notary signature"></div>
-</div><div class="notice" id="vDeclaration"></div><div class="footer"><span id="vCardNo"></span><span class="badge">NOT GOVERNMENT ID</span><span id="vExpiry"></span></div>
+<div>
+  <img id="photoPreview" class="photo" alt="Holder photo">
+  <div class="ink-box"><span>Holder signature — sign in ink</span></div>
+</div>
+<div class="details">
+  <div class="detail-row single">
+    <div class="field"><b>Full legal name</b><span id="vFullName"></span></div>
+  </div>
+  <div class="detail-row">
+    <div class="field compact"><b>Date of birth</b><span id="vDob"></span></div>
+    <div class="field compact"><b>Sex</b><span id="vSex"></span></div>
+  </div>
+  <div class="detail-row single">
+    <div class="field"><b>Marital status</b><span class="status" id="vMarital"></span></div>
+  </div>
+  <div class="detail-row single">
+    <div class="field"><b>Place of birth</b><span id="vBirthPlace"></span></div>
+  </div>
+  <div class="detail-row">
+    <div class="field compact"><b>Citizenship</b><span id="vCitizenship"></span></div>
+    <div class="field compact"><b>Occupation</b><span id="vOccupation"></span></div>
+  </div>
+  <div class="detail-row single">
+    <div class="field"><b>Residence</b><span id="vAddress"></span></div>
+  </div>
+</div>
+<div class="notary-box">
+  <div><img id="sealPreview" class="seal-img" alt=""><b>NOTARY / COMMISSIONER</b></div>
+  <div><b>Name</b><div id="vNotaryName" class="line"></div></div>
+  <div><b>Capacity</b><div id="vCapacity" class="notary-value"></div></div>
+  <div><b>Licence / appointment no.</b><div id="vLicence" class="notary-value"></div></div>
+  <div class="notary-row">
+    <div><b>Appointment expiry</b><div id="vAppointmentExpiry" class="notary-value"></div></div>
+    <div><b>Issue date</b><div id="vIssueDate" class="notary-value"></div></div>
+  </div>
+  <div class="notary-row">
+    <div><b>Review date</b><div id="vReviewDate" class="notary-value"></div></div>
+    <div><b>Signature</b><img id="sigPreview" style="width:100%;height:.19in;object-fit:contain;border-bottom:1px solid #555" alt="Notary signature"></div>
+  </div>
+</div>
+</div>
+<div id="linkedChip" class="linked-chip empty"><b>Linked record:</b> <span id="vLinked"></span> · <b>FP:</b> <span id="vFingerprint"></span></div>
+<div class="notice" id="vDeclaration"></div><div class="footer"><span id="vCardNo"></span><span class="badge">NOT GOVERNMENT ID</span><span id="vExpiry"></span></div>
 </div></div></div>
 <p class="help no-print">CR80 card size: 3.375 × 2.125 inches. The PNG exporter captures the actual card DOM at 1013 × 638 pixels so it matches the preview.</p><div id="exportStatus" class="help no-print" aria-live="polite"></div>
 </section></div>
@@ -91,7 +144,7 @@ async function makeFingerprint(){const payload=[fullName.value,dob.value,marital
 
 function fitCardText(){
   const card=$("card");
-  const fields=card.querySelectorAll(".field span,.linked-chip,.notice,.notary-box>div");
+  const fields=card.querySelectorAll(".field span,.notice,.notary-value,.line");
   fields.forEach(el=>{
     el.style.fontSize="";
     let size=parseFloat(getComputedStyle(el).fontSize);
@@ -102,7 +155,10 @@ function fitCardText(){
   });
 }
 
-function update(){vFullName.textContent=fullName.value;vDob.textContent=fmtDate(dob.value);vSex.textContent=sex.value;vMarital.textContent=marital.value;vBirthPlace.textContent=birthPlace.value;vCitizenship.textContent=citizenship.value;vOccupation.textContent=occupation.value;vAddress.textContent=address.value;vCardNo.textContent=cardNo.value;vIssueDate.textContent=fmtDate(issueDate.value);vReviewDate.textContent=fmtDate(reviewDate.value);vExpiry.textContent=expiryText.value;vDeclaration.textContent=declarationText.value;vNotaryName.textContent=notaryName.value||" ";vCapacity.textContent=capacity.value;vLicence.textContent=licenceNo.value||"—";vAppointmentExpiry.textContent=fmtDate(appointmentExpiry.value);photoPreview.src=state.photo||placeholderPhoto();logoPreview.src=state.seal||placeholderSeal();sealPreview.src=state.seal||placeholderSeal();sigPreview.src=state.signature||blankSignature();fitCardText();const linked=[linkedIdType.value,linkedIssuer.value,linkedRef.value?("ref "+linkedRef.value):"",statusEvidenceType.value,statusEvidenceRef.value].filter(Boolean).join(" • ");vLinked.textContent=linked||"No linked record";makeFingerprint()}
+function update(){vFullName.textContent=fullName.value;vDob.textContent=fmtDate(dob.value);vSex.textContent=sex.value;vMarital.textContent=marital.value;vBirthPlace.textContent=birthPlace.value;vCitizenship.textContent=citizenship.value;vOccupation.textContent=occupation.value;vAddress.textContent=address.value;vCardNo.textContent=cardNo.value;vIssueDate.textContent=fmtDate(issueDate.value);vReviewDate.textContent=fmtDate(reviewDate.value);vExpiry.textContent=expiryText.value;vDeclaration.textContent=declarationText.value;vNotaryName.textContent=notaryName.value||" ";vCapacity.textContent=capacity.value;vLicence.textContent=licenceNo.value||"—";vAppointmentExpiry.textContent=fmtDate(appointmentExpiry.value);photoPreview.src=state.photo||placeholderPhoto();logoPreview.src=state.seal||placeholderSeal();sealPreview.src=state.seal||placeholderSeal();sigPreview.src=state.signature||blankSignature();fitCardText();const linked=[linkedIdType.value,linkedIssuer.value,linkedRef.value?("ref "+linkedRef.value):"",statusEvidenceType.value,statusEvidenceRef.value].filter(Boolean).join(" • ");
+vLinked.textContent=linked;
+linkedChip.classList.toggle("empty",!linked);
+makeFingerprint()}
 fields.forEach(id=>$(id).addEventListener("input",update));
 function fileToData(input,key){const f=input.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{state[key]=r.result;update()};r.readAsDataURL(f)}photoInput.addEventListener("change",()=>fileToData(photoInput,"photo"));sealInput.addEventListener("change",()=>fileToData(sealInput,"seal"));
 const pad=signPad,ctx=pad.getContext("2d");ctx.lineWidth=4;ctx.lineCap="round";ctx.strokeStyle="#111";let drawing=false;function pos(e){const r=pad.getBoundingClientRect(),p=e.touches?e.touches[0]:e;return{x:(p.clientX-r.left)*pad.width/r.width,y:(p.clientY-r.top)*pad.height/r.height}}function start(e){drawing=true;const p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);e.preventDefault()}function move(e){if(!drawing)return;const p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke();state.signature=pad.toDataURL("image/png");update();e.preventDefault()}function end(){drawing=false}pad.addEventListener("mousedown",start);pad.addEventListener("mousemove",move);window.addEventListener("mouseup",end);pad.addEventListener("touchstart",start,{passive:false});pad.addEventListener("touchmove",move,{passive:false});pad.addEventListener("touchend",end);clearSig.addEventListener("click",()=>{ctx.clearRect(0,0,pad.width,pad.height);state.signature="";update()});
@@ -158,7 +214,7 @@ function newId(){return "rec-"+Date.now().toString(36)+"-"+Math.random().toStrin
 function renderArchive(){const q=(archiveSearch.value||"").toLowerCase();const items=readArchive().filter(r=>[r.fullName,r.cardNo,r.marital,r.linkedIdType].join(" ").toLowerCase().includes(q));archiveList.innerHTML=items.length?"":"<div class='archive-item help'>No saved cards.</div>";items.sort((a,b)=>(b.updatedAt||"").localeCompare(a.updatedAt||"")).forEach(r=>{const div=document.createElement("div");div.className="archive-item";div.innerHTML=`<b>${r.fullName||"Unnamed"}</b><div class="help">${r.cardNo||"No card number"} • ${r.marital||"No status"} • ${r.updatedAt?new Date(r.updatedAt).toLocaleString():""}</div>`;const open=document.createElement("button");open.type="button";open.className="secondary";open.textContent="Open / update";open.addEventListener("click",()=>applyProject(r));const del=document.createElement("button");del.type="button";del.className="warn";del.textContent="Delete";del.addEventListener("click",()=>{if(confirm("Delete this saved card?")){writeArchive(readArchive().filter(x=>x.recordId!==r.recordId));renderArchive()}});div.append(open,del);archiveList.appendChild(div)})}
 saveArchive.addEventListener("click",()=>{const rec=getProject();if(!rec.recordId)rec.recordId=newId();state.recordId=rec.recordId;const items=readArchive();const i=items.findIndex(x=>x.recordId===rec.recordId);if(i>=0)items[i]=rec;else items.push(rec);writeArchive(items);renderArchive();alert("Card saved in this browser.")});
 archiveSearch.addEventListener("input",renderArchive);
-newCard.addEventListener("click",()=>{if(!confirm("Clear all fields and start a new card? Unsaved changes will be lost."))return;fields.forEach(id=>{const el=$(id);if(el.tagName==="SELECT")el.selectedIndex=0;else el.value=""});linkConsent.checked=false;state.photo="";state.seal="";state.signature="";state.recordId="";ctx.clearRect(0,0,pad.width,pad.height);declarationText.value="I solemnly declare that the information shown on this card is true to the best of my knowledge and belief.";expiryText.value="Upon status change or change in information";issueDate.value=new Date().toISOString().slice(0,10);update()});
+newCard.addEventListener("click",()=>{if(!confirm("Clear all fields and start a new card? Unsaved changes will be lost."))return;fields.forEach(id=>{const el=$(id);if(el.tagName==="SELECT")el.selectedIndex=0;else el.value=""});linkConsent.checked=false;state.photo="";state.seal="";state.signature="";state.recordId="";ctx.clearRect(0,0,pad.width,pad.height);declarationText.value="I solemnly declare that the information shown is true to the best of my knowledge and belief.";expiryText.value="Upon status change or change in information";issueDate.value=new Date().toISOString().slice(0,10);update()});
 exportArchive.addEventListener("click",()=>download("declaration-card-archive.json",new Blob([JSON.stringify({format:"OntarioDeclarationCardArchive",version:2,records:readArchive()},null,2)],{type:"application/json"})));
 importArchiveBtn.addEventListener("click",()=>importArchive.click());
 importArchive.addEventListener("change",()=>{const f=importArchive.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result),incoming=Array.isArray(d)?d:(d.records||[]),items=readArchive(),map=new Map(items.map(x=>[x.recordId||newId(),x]));incoming.forEach(x=>map.set(x.recordId||newId(),x));writeArchive([...map.values()]);renderArchive();alert("Archive imported.")}catch(e){alert("Could not import archive.")}};r.readAsText(f)});
