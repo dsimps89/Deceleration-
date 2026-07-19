@@ -32,51 +32,74 @@ button{border:0;border-radius:9px;padding:10px 12px;font-weight:800;cursor:point
 .footer{position:absolute;left:0;right:0;bottom:0;height:.23in;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 .1in;font-size:5.7px}.badge{color:#ffe69c;font-weight:900}.notice{position:absolute;left:.10in;right:.10in;bottom:.405in;height:.12in;font-size:4.65px;line-height:1.03;text-align:center;color:#29333d;overflow:hidden}.seal-img{width:.25in;height:.25in;border-radius:50%;object-fit:contain;border:1px solid #99a3ae;float:right}.hidden{display:none!important}.archive-list{max-height:220px;overflow:auto;border:1px solid #d5dbe3;border-radius:9px;margin-top:8px}.archive-item{padding:9px;border-bottom:1px solid #e4e8ee}.archive-item:last-child{border-bottom:0}.archive-item button{padding:6px 8px;margin:4px 4px 0 0}.security-box{border:1px solid #9aa7b7;border-radius:8px;padding:10px;background:#f7f9fb}.fingerprint{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;word-break:break-all;background:#eef2f6;padding:8px;border-radius:6px}.linked-chip{position:absolute;left:1.18in;right:.10in;bottom:.285in;height:.105in;font-size:4.35px;line-height:1;text-align:right;border-top:1px solid #9aa5b1;padding-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.linked-chip.empty{display:none}
 @media(max-width:950px){.app{grid-template-columns:1fr}}@media print{body{background:#fff}.controls,.no-print{display:none!important}.app{display:block;padding:0}.panel{border:0;box-shadow:none;padding:0}.stage{padding:0}.card-wrap{width:3.375in}.card{box-shadow:none;border:.3pt solid #999}@page{size:3.375in 2.125in;margin:0}}
 
-/* Mobile/card layout surgery: reserve a clean lower band for declaration + linked record */
+
+/* Clean CR80 layout: three columns plus dedicated declaration/link/footer bands */
 .body{
-  height:1.14in;
-  padding:.05in .075in 0;
-  grid-template-columns:.72in minmax(0,1.23in) .98in;
-  gap:.05in;
+  display:grid;
+  grid-template-columns:.70in minmax(0,1.28in) .95in;
+  gap:.055in;
+  padding:.055in .075in 0;
+  height:1.20in;
+  overflow:hidden;
 }
-.photo{width:.66in;height:.72in}
-.ink-box{height:.17in;margin-top:2px}
-.ink-box span{font-size:4.5px}
-.details{gap:2px}
-.detail-row{gap:4px}
-.field{font-size:5.65px;line-height:1.02}
-.field b{font-size:4.75px}
-.status{font-size:6.15px}
-.notary-box{font-size:4.7px;line-height:1;padding:.032in;gap:1px}
-.notary-box b{font-size:4.45px}
-.notary-value{min-height:6px}
-.line{min-height:7px}
-.seal-img{width:.22in;height:.22in}
+.body>div{min-width:0;overflow:hidden}
+.photo{width:.64in;height:.73in}
+.ink-box{height:.18in;margin-top:3px}
+.ink-box span{font-size:4.35px}
+.details{display:flex;flex-direction:column;gap:3px;min-width:0}
+.detail-row{gap:5px}
+.field{font-size:5.55px;line-height:1.08}
+.field b{font-size:4.55px;line-height:1.05;margin-bottom:1px}
+.field span{max-height:2.2em}
+.field.compact span{max-height:1.15em}
+.status{font-size:6.05px;line-height:1.05}
+.notary-box{
+  font-size:4.55px;
+  line-height:1.04;
+  padding:.035in;
+  gap:2px;
+}
+.notary-box b{font-size:4.25px;line-height:1.02}
+.notary-row{gap:5px}
+.notary-value{min-height:7px;max-height:1.2em}
+.line{min-height:8px;margin-bottom:2px}
+.seal-img{width:.21in;height:.21in}
 .notice{
+  position:absolute;
   left:.10in;
   right:.10in;
-  bottom:.39in;
-  height:.13in;
-  font-size:4.55px;
-  line-height:1.05;
+  bottom:.405in;
+  height:.145in;
   display:flex;
   align-items:center;
   justify-content:center;
+  padding:2px .03in 0;
   border-top:1px solid #b8c0ca;
-  padding-top:2px;
+  font-size:4.35px;
+  line-height:1.08;
+  text-align:center;
+  overflow:hidden;
 }
 .linked-chip{
+  position:absolute;
   left:.10in;
   right:.10in;
-  bottom:.255in;
+  bottom:.265in;
   height:.105in;
-  font-size:4.25px;
+  padding-top:2px;
+  border-top:1px solid #9aa5b1;
+  font-size:4.05px;
   line-height:1;
   text-align:right;
-  border-top:1px solid #9aa5b1;
-  padding-top:2px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
-
+.footer{height:.23in}
+@media(max-width:950px){
+  .app{grid-template-columns:1fr}
+  .stage{justify-content:flex-start}
+}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 </head>
@@ -181,164 +204,450 @@ button{border:0;border-radius:9px;padding:10px 12px;font-weight:800;cursor:point
 <p class="help no-print">CR80 card size: 3.375 × 2.125 inches. The PNG exporter captures the actual card DOM at 1013 × 638 pixels so it matches the preview.</p><div id="exportStatus" class="help no-print" aria-live="polite"></div>
 </section></div>
 <script>
-const $=id=>document.getElementById(id);const fields=["fullName","dob","sex","marital","birthPlace","citizenship","occupation","address","cardNo","issueDate","reviewDate","expiryText","declarationText","linkedIdType","linkedIssuer","linkedRef","linkedExpiry","statusEvidenceType","statusEvidenceRef","notaryName","capacity","licenceNo","appointmentExpiry","notaryPhone","notaryAddress"];const state={photo:"",seal:"",signature:"",recordId:""};
-function fmtDate(v){if(!v)return"—";const d=new Date(v+"T12:00:00");return d.toLocaleDateString("en-CA",{year:"numeric",month:"short",day:"numeric"})}
-function placeholderPhoto(){return"data:image/svg+xml;charset=utf-8,"+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="300" height="360"><rect width="100%" height="100%" fill="#dde3ea"/><circle cx="150" cy="115" r="58" fill="#aeb8c5"/><rect x="65" y="190" width="170" height="130" rx="70" fill="#aeb8c5"/><text x="150" y="342" text-anchor="middle" font-family="Arial" font-size="18" fill="#52606d">PHOTO</text></svg>`)}
-function placeholderSeal(){return"data:image/svg+xml;charset=utf-8,"+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180"><circle cx="90" cy="90" r="82" fill="#fff" stroke="#b89248" stroke-width="7"/><circle cx="90" cy="90" r="58" fill="none" stroke="#10284a" stroke-width="4"/><text x="90" y="84" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="20" fill="#10284a">SEAL</text><text x="90" y="110" text-anchor="middle" font-family="Arial" font-size="14" fill="#10284a">OPTIONAL</text></svg>`)}
-function blankSignature(){return"data:image/svg+xml;charset=utf-8,"+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="600" height="150"></svg>`)}
+
+"use strict";
+
+const $ = id => document.getElementById(id);
+const fieldIds = [
+  "fullName","dob","sex","marital","birthPlace","citizenship","occupation","address",
+  "cardNo","issueDate","reviewDate","expiryText","declarationText",
+  "linkedIdType","linkedIssuer","linkedRef","linkedExpiry",
+  "statusEvidenceType","statusEvidenceRef",
+  "notaryName","capacity","licenceNo","appointmentExpiry","notaryPhone","notaryAddress"
+];
+
+const state = {photo:"", seal:"", signature:"", recordId:""};
+const ARCHIVE_KEY = "ontarioDeclarationCardArchive.v3";
+
+function fmtDate(value){
+  if(!value) return "—";
+  const d = new Date(value + "T12:00:00");
+  return d.toLocaleDateString("en-CA",{year:"numeric",month:"short",day:"numeric"});
+}
+
+function placeholderPhoto(){
+  return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="300" height="360">
+      <rect width="100%" height="100%" fill="#dde3ea"/>
+      <circle cx="150" cy="115" r="58" fill="#aeb8c5"/>
+      <rect x="65" y="190" width="170" height="130" rx="70" fill="#aeb8c5"/>
+      <text x="150" y="342" text-anchor="middle" font-family="Arial" font-size="18" fill="#52606d">PHOTO</text>
+    </svg>`
+  );
+}
+
+function placeholderSeal(){
+  return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180">
+      <circle cx="90" cy="90" r="82" fill="#fff" stroke="#b89248" stroke-width="7"/>
+      <circle cx="90" cy="90" r="58" fill="none" stroke="#10284a" stroke-width="4"/>
+      <text x="90" y="84" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="20" fill="#10284a">SEAL</text>
+      <text x="90" y="110" text-anchor="middle" font-family="Arial" font-size="14" fill="#10284a">OPTIONAL</text>
+    </svg>`
+  );
+}
+
+function blankSignature(){
+  return "data:image/svg+xml;charset=utf-8," +
+    encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="600" height="150"></svg>`);
+}
+
+function fitCardText(){
+  const card = $("card");
+  if(!card) return;
+  card.querySelectorAll(".field span,.notice,.notary-value,.line").forEach(el=>{
+    el.style.fontSize = "";
+    let size = parseFloat(getComputedStyle(el).fontSize) || 5;
+    let guard = 0;
+    while((el.scrollHeight > el.clientHeight + 1 || el.scrollWidth > el.clientWidth + 1)
+      && size > 3.75 && guard < 16){
+      size -= .2;
+      el.style.fontSize = size + "px";
+      guard++;
+    }
+  });
+}
+
 async function makeFingerprint(){
-  const get=id=>$(id)?.value||"";
-  const payload=[
-    get("fullName"),get("dob"),get("marital"),get("cardNo"),
-    get("linkedIdType"),get("linkedIssuer"),get("linkedRef"),
-    get("linkedExpiry"),get("statusEvidenceType"),
-    get("statusEvidenceRef"),get("issueDate")
+  const payload = [
+    $("fullName").value,$("dob").value,$("marital").value,$("cardNo").value,
+    $("linkedIdType").value,$("linkedIssuer").value,$("linkedRef").value,
+    $("linkedExpiry").value,$("statusEvidenceType").value,
+    $("statusEvidenceRef").value,$("issueDate").value
   ].join("|");
 
-  const fullOutput=$("fingerprint");
-  const cardOutput=$("vFingerprint");
-
   if(!payload.replace(/\|/g,"")){
-    if(fullOutput) fullOutput.textContent="Not generated";
-    if(cardOutput) cardOutput.textContent="—";
+    $("fingerprint").textContent = "Not generated";
+    $("vFingerprint").textContent = "—";
     return;
   }
 
   try{
     if(window.crypto?.subtle && window.TextEncoder){
-      const data=new TextEncoder().encode(payload);
-      const digest=await crypto.subtle.digest("SHA-256",data);
-      const hex=[...new Uint8Array(digest)]
+      const digest = await crypto.subtle.digest("SHA-256",new TextEncoder().encode(payload));
+      const hex = [...new Uint8Array(digest)]
         .map(b=>b.toString(16).padStart(2,"0")).join("");
-      if(fullOutput) fullOutput.textContent=hex;
-      if(cardOutput) cardOutput.textContent=hex.slice(0,16).toUpperCase();
+      $("fingerprint").textContent = hex;
+      $("vFingerprint").textContent = hex.slice(0,16).toUpperCase();
       return;
     }
-  }catch(err){
-    console.warn("SHA-256 fingerprint unavailable; using local fallback.",err);
+  }catch(error){
+    console.warn("SHA-256 unavailable, using compatibility fingerprint.",error);
   }
 
-  // Compatibility fallback for browsers or non-secure local previews.
   let h1=0x811c9dc5,h2=0x9e3779b9;
   for(let i=0;i<payload.length;i++){
     const c=payload.charCodeAt(i);
     h1=Math.imul(h1^c,0x01000193)>>>0;
     h2=Math.imul(h2+c+(h2<<6)+(h2>>>2),0x85ebca6b)>>>0;
   }
-  const shortHex=(h1.toString(16).padStart(8,"0")+h2.toString(16).padStart(8,"0")).toUpperCase();
-  const display=shortHex.match(/.{1,4}/g).join("-");
-  if(fullOutput) fullOutput.textContent=display+" (local compatibility fingerprint)";
-  if(cardOutput) cardOutput.textContent=shortHex;
+  const hex=(h1.toString(16).padStart(8,"0")+h2.toString(16).padStart(8,"0")).toUpperCase();
+  $("fingerprint").textContent = hex.match(/.{1,4}/g).join("-");
+  $("vFingerprint").textContent = hex;
 }
 
-function fitCardText(){
-  const card=$("card");
-  const fields=card.querySelectorAll(".field span,.notice,.notary-value,.line");
-  fields.forEach(el=>{
-    el.style.fontSize="";
-    let size=parseFloat(getComputedStyle(el).fontSize);
-    let guard=0;
-    while((el.scrollHeight>el.clientHeight+1||el.scrollWidth>el.clientWidth+1)&&size>4&&guard<12){
-      size-=.25;el.style.fontSize=size+"px";guard++;
-    }
+function update(){
+  $("vFullName").textContent = $("fullName").value;
+  $("vDob").textContent = fmtDate($("dob").value);
+  $("vSex").textContent = $("sex").value;
+  $("vMarital").textContent = $("marital").value;
+  $("vBirthPlace").textContent = $("birthPlace").value;
+  $("vCitizenship").textContent = $("citizenship").value;
+  $("vOccupation").textContent = $("occupation").value;
+  $("vAddress").textContent = $("address").value;
+  $("vCardNo").textContent = $("cardNo").value;
+  $("vIssueDate").textContent = fmtDate($("issueDate").value);
+  $("vReviewDate").textContent = fmtDate($("reviewDate").value);
+  $("vExpiry").textContent = $("expiryText").value;
+  $("vDeclaration").textContent = $("declarationText").value;
+  $("vNotaryName").textContent = $("notaryName").value || " ";
+  $("vCapacity").textContent = $("capacity").value;
+  $("vLicence").textContent = $("licenceNo").value || "—";
+  $("vAppointmentExpiry").textContent = fmtDate($("appointmentExpiry").value);
+
+  $("photoPreview").src = state.photo || placeholderPhoto();
+  $("logoPreview").src = state.seal || placeholderSeal();
+  $("sealPreview").src = state.seal || placeholderSeal();
+  $("sigPreview").src = state.signature || blankSignature();
+
+  const linked = [
+    $("linkedIdType").value,
+    $("linkedIssuer").value,
+    $("linkedRef").value ? "ref " + $("linkedRef").value : "",
+    $("statusEvidenceType").value,
+    $("statusEvidenceRef").value
+  ].filter(Boolean).join(" • ");
+
+  $("vLinked").textContent = linked;
+  $("linkedChip").classList.toggle("empty",!linked);
+
+  requestAnimationFrame(fitCardText);
+  makeFingerprint();
+}
+
+fieldIds.forEach(id=>{
+  const el=$(id);
+  el.addEventListener("input",update);
+  el.addEventListener("change",update);
+});
+
+function fileToData(input,key){
+  const file=input.files?.[0];
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=()=>{state[key]=reader.result;update();};
+  reader.readAsDataURL(file);
+}
+$("photoInput").addEventListener("change",()=>fileToData($("photoInput"),"photo"));
+$("sealInput").addEventListener("change",()=>fileToData($("sealInput"),"seal"));
+
+const pad=$("signPad");
+const ctx=pad.getContext("2d");
+ctx.lineWidth=4;
+ctx.lineCap="round";
+ctx.lineJoin="round";
+ctx.strokeStyle="#111";
+let drawing=false;
+
+function pointerPosition(e){
+  const r=pad.getBoundingClientRect();
+  return {
+    x:(e.clientX-r.left)*pad.width/r.width,
+    y:(e.clientY-r.top)*pad.height/r.height
+  };
+}
+function beginSignature(e){
+  drawing=true;
+  pad.setPointerCapture?.(e.pointerId);
+  const p=pointerPosition(e);
+  ctx.beginPath();
+  ctx.moveTo(p.x,p.y);
+  e.preventDefault();
+}
+function drawSignature(e){
+  if(!drawing) return;
+  const p=pointerPosition(e);
+  ctx.lineTo(p.x,p.y);
+  ctx.stroke();
+  state.signature=pad.toDataURL("image/png");
+  $("sigPreview").src=state.signature;
+  e.preventDefault();
+}
+function endSignature(e){
+  if(!drawing) return;
+  drawing=false;
+  state.signature=pad.toDataURL("image/png");
+  pad.releasePointerCapture?.(e.pointerId);
+  update();
+}
+pad.addEventListener("pointerdown",beginSignature);
+pad.addEventListener("pointermove",drawSignature);
+pad.addEventListener("pointerup",endSignature);
+pad.addEventListener("pointercancel",endSignature);
+$("clearSig").addEventListener("click",()=>{
+  ctx.clearRect(0,0,pad.width,pad.height);
+  state.signature="";
+  update();
+});
+
+function getProject(){
+  const data={};
+  fieldIds.forEach(id=>data[id]=$(id).value);
+  data.linkConsent=$("linkConsent").checked;
+  return {...data,...state,version:3,updatedAt:new Date().toISOString()};
+}
+
+function applyProject(data){
+  fieldIds.forEach(id=>{
+    if(data[id]!==undefined && data[id]!==null) $(id).value=data[id];
+  });
+  $("linkConsent").checked=!!data.linkConsent;
+  state.photo=data.photo||"";
+  state.seal=data.seal||"";
+  state.signature=data.signature||"";
+  state.recordId=data.recordId||"";
+
+  ctx.clearRect(0,0,pad.width,pad.height);
+  if(state.signature){
+    const image=new Image();
+    image.onload=()=>ctx.drawImage(image,0,0,pad.width,pad.height);
+    image.src=state.signature;
+  }
+  update();
+}
+
+function download(name,blob){
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;
+  a.download=name;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+function readArchive(){
+  try{
+    const parsed=JSON.parse(localStorage.getItem(ARCHIVE_KEY)||"[]");
+    return Array.isArray(parsed)?parsed:[];
+  }catch(error){
+    console.error(error);
+    return [];
+  }
+}
+function writeArchive(items){
+  localStorage.setItem(ARCHIVE_KEY,JSON.stringify(items));
+}
+function newId(){
+  return "rec-"+Date.now().toString(36)+"-"+Math.random().toString(36).slice(2,8);
+}
+function escapeHtml(value){
+  return String(value??"").replace(/[&<>"']/g,ch=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+  })[ch]);
+}
+function renderArchive(){
+  const list=$("archiveList");
+  const q=$("archiveSearch").value.trim().toLowerCase();
+  const items=readArchive()
+    .filter(r=>[r.fullName,r.cardNo,r.marital,r.linkedIdType].join(" ").toLowerCase().includes(q))
+    .sort((a,b)=>(b.updatedAt||"").localeCompare(a.updatedAt||""));
+
+  list.innerHTML="";
+  if(!items.length){
+    list.innerHTML="<div class='archive-item help'>No saved cards.</div>";
+    return;
+  }
+
+  items.forEach(record=>{
+    const div=document.createElement("div");
+    div.className="archive-item";
+    div.innerHTML=`<b>${escapeHtml(record.fullName||"Unnamed")}</b>
+      <div class="help">${escapeHtml(record.cardNo||"No card number")} •
+      ${escapeHtml(record.marital||"No status")} •
+      ${record.updatedAt?escapeHtml(new Date(record.updatedAt).toLocaleString()):""}</div>`;
+
+    const open=document.createElement("button");
+    open.type="button";
+    open.className="secondary";
+    open.textContent="Open / update";
+    open.addEventListener("click",()=>applyProject(record));
+
+    const del=document.createElement("button");
+    del.type="button";
+    del.className="warn";
+    del.textContent="Delete";
+    del.addEventListener("click",()=>{
+      if(!confirm("Delete this saved card?")) return;
+      writeArchive(readArchive().filter(x=>x.recordId!==record.recordId));
+      if(state.recordId===record.recordId) state.recordId="";
+      renderArchive();
+    });
+
+    div.append(open,del);
+    list.appendChild(div);
   });
 }
 
-function update(){vFullName.textContent=fullName.value;vDob.textContent=fmtDate(dob.value);vSex.textContent=sex.value;vMarital.textContent=marital.value;vBirthPlace.textContent=birthPlace.value;vCitizenship.textContent=citizenship.value;vOccupation.textContent=occupation.value;vAddress.textContent=address.value;vCardNo.textContent=cardNo.value;vIssueDate.textContent=fmtDate(issueDate.value);vReviewDate.textContent=fmtDate(reviewDate.value);vExpiry.textContent=expiryText.value;vDeclaration.textContent=declarationText.value;vNotaryName.textContent=notaryName.value||" ";vCapacity.textContent=capacity.value;vLicence.textContent=licenceNo.value||"—";vAppointmentExpiry.textContent=fmtDate(appointmentExpiry.value);photoPreview.src=state.photo||placeholderPhoto();logoPreview.src=state.seal||placeholderSeal();sealPreview.src=state.seal||placeholderSeal();sigPreview.src=state.signature||blankSignature();fitCardText();const linked=[linkedIdType.value,linkedIssuer.value,linkedRef.value?("ref "+linkedRef.value):"",statusEvidenceType.value,statusEvidenceRef.value].filter(Boolean).join(" • ");
-vLinked.textContent=linked;
-linkedChip.classList.toggle("empty",!linked);
-makeFingerprint()}
-fields.forEach(id=>$(id).addEventListener("input",update));
-function fileToData(input,key){const f=input.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{state[key]=r.result;update()};r.readAsDataURL(f)}photoInput.addEventListener("change",()=>fileToData(photoInput,"photo"));sealInput.addEventListener("change",()=>fileToData(sealInput,"seal"));
-const pad=$("signPad"),ctx=pad.getContext("2d");
-ctx.lineWidth=4;ctx.lineCap="round";ctx.lineJoin="round";ctx.strokeStyle="#111";
-let drawing=false;
-function pos(e){
-  const r=pad.getBoundingClientRect();
-  return{x:(e.clientX-r.left)*pad.width/r.width,y:(e.clientY-r.top)*pad.height/r.height};
-}
-function start(e){
-  drawing=true;
-  pad.setPointerCapture?.(e.pointerId);
-  const p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);
-  e.preventDefault();
-}
-function move(e){
-  if(!drawing)return;
-  const p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke();
-  state.signature=pad.toDataURL("image/png");
-  sigPreview.src=state.signature;
-  e.preventDefault();
-}
-function end(e){
-  if(!drawing)return;
-  drawing=false;
-  state.signature=pad.toDataURL("image/png");
+$("saveArchive").addEventListener("click",()=>{
+  try{
+    const record=getProject();
+    if(!record.recordId) record.recordId=newId();
+    state.recordId=record.recordId;
+
+    const items=readArchive();
+    const index=items.findIndex(x=>x.recordId===record.recordId);
+    if(index>=0) items[index]=record;
+    else items.push(record);
+
+    writeArchive(items);
+    renderArchive();
+    $("saveArchive").textContent="Saved ✓";
+    setTimeout(()=>$("saveArchive").textContent="Save / update card",1400);
+  }catch(error){
+    console.error(error);
+    alert("This browser could not save the card. Check that website storage is enabled.");
+  }
+});
+
+$("archiveSearch").addEventListener("input",renderArchive);
+
+$("newCard").addEventListener("click",()=>{
+  if(!confirm("Clear all fields and start a new card? Unsaved changes will be lost.")) return;
+  fieldIds.forEach(id=>{
+    const el=$(id);
+    if(el.tagName==="SELECT") el.selectedIndex=0;
+    else el.value="";
+  });
+  $("linkConsent").checked=false;
+  Object.assign(state,{photo:"",seal:"",signature:"",recordId:""});
+  ctx.clearRect(0,0,pad.width,pad.height);
+  $("declarationText").value="I solemnly declare that the information shown is true to the best of my knowledge and belief.";
+  $("expiryText").value="Upon status change or change in information";
+  $("issueDate").value=new Date().toISOString().slice(0,10);
   update();
-  pad.releasePointerCapture?.(e.pointerId);
-}
-pad.addEventListener("pointerdown",start);
-pad.addEventListener("pointermove",move);
-pad.addEventListener("pointerup",end);
-pad.addEventListener("pointercancel",end);
-$("clearSig").addEventListener("click",()=>{ctx.clearRect(0,0,pad.width,pad.height);state.signature="";update()});
-function getProject(){const d={};fields.forEach(id=>d[id]=$(id).value);d.linkConsent=linkConsent.checked;return{...d,...state,version:2,updatedAt:new Date().toISOString()}}function applyProject(d){fields.forEach(id=>{if(d[id]!=null)$(id).value=d[id]});linkConsent.checked=!!d.linkConsent;state.photo=d.photo||"";state.seal=d.seal||"";state.signature=d.signature||"";state.recordId=d.recordId||"";ctx.clearRect(0,0,pad.width,pad.height);if(state.signature){const im=new Image();im.onload=()=>ctx.drawImage(im,0,0,pad.width,pad.height);im.src=state.signature}update()}
-function download(name,blob){const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}saveProject.addEventListener("click",()=>download("declaration-card-project.json",new Blob([JSON.stringify(getProject(),null,2)],{type:"application/json"})));loadProjectBtn.addEventListener("click",()=>loadProject.click());loadProject.addEventListener("change",()=>{const f=loadProject.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{applyProject(JSON.parse(r.result))}catch(e){alert("Could not load project file.")}};r.readAsText(f)});printCard.addEventListener("click",()=>window.print());
-exportHtml.addEventListener("click",()=>{const clone=document.documentElement.cloneNode(true);clone.querySelector("body").insertAdjacentHTML("beforeend",`<script>window.addEventListener("DOMContentLoaded",()=>{try{applyProject(${JSON.stringify(getProject())})}catch(e){}});<\/script>`);download("editable-declaration-card.html",new Blob(["<!doctype html>\n"+clone.outerHTML],{type:"text/html"}))});
+});
+
+$("saveProject").addEventListener("click",()=>{
+  download("declaration-card-project.json",
+    new Blob([JSON.stringify(getProject(),null,2)],{type:"application/json"}));
+});
+$("loadProjectBtn").addEventListener("click",()=>$("loadProject").click());
+$("loadProject").addEventListener("change",()=>{
+  const file=$("loadProject").files?.[0];
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=()=>{
+    try{applyProject(JSON.parse(reader.result));}
+    catch(error){alert("Could not load project file.");}
+  };
+  reader.readAsText(file);
+});
+$("printCard").addEventListener("click",()=>window.print());
+
+$("exportArchive").addEventListener("click",()=>{
+  download("declaration-card-archive.json",
+    new Blob([JSON.stringify({format:"OntarioDeclarationCardArchive",version:3,records:readArchive()},null,2)],
+    {type:"application/json"}));
+});
+$("importArchiveBtn").addEventListener("click",()=>$("importArchive").click());
+$("importArchive").addEventListener("change",()=>{
+  const file=$("importArchive").files?.[0];
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=()=>{
+    try{
+      const data=JSON.parse(reader.result);
+      const incoming=Array.isArray(data)?data:(data.records||[]);
+      const map=new Map(readArchive().map(x=>[x.recordId||newId(),x]));
+      incoming.forEach(x=>map.set(x.recordId||newId(),x));
+      writeArchive([...map.values()]);
+      renderArchive();
+      alert("Archive imported.");
+    }catch(error){
+      alert("Could not import archive.");
+    }
+  };
+  reader.readAsText(file);
+});
+
+$("exportHtml").addEventListener("click",()=>{
+  const clone=document.documentElement.cloneNode(true);
+  clone.querySelector("body").insertAdjacentHTML("beforeend",
+    `<script>window.addEventListener("DOMContentLoaded",()=>{try{applyProject(${JSON.stringify(getProject())})}catch(e){console.error(e)}});<\/script>`);
+  download("editable-declaration-card.html",
+    new Blob(["<!doctype html>\n"+clone.outerHTML],{type:"text/html"}));
+});
 
 async function exportCardAsPng(){
-  const target=$("card"), status=$("exportStatus");
+  const status=$("exportStatus");
   status.textContent="Preparing card image…";
   try{
-    if(document.fonts&&document.fonts.ready) await document.fonts.ready;
-    await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
-    const targetW=1013,targetH=638;
+    if(typeof html2canvas!=="function") throw new Error("Export library unavailable");
+    if(document.fonts?.ready) await document.fonts.ready;
+    await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+
+    const target=$("card");
     const rect=target.getBoundingClientRect();
-    const scale=targetW/rect.width;
+    const targetW=1013,targetH=638;
     const canvas=await html2canvas(target,{
       backgroundColor:null,
-      scale,
+      scale:targetW/rect.width,
       useCORS:true,
       allowTaint:false,
       logging:false,
       width:rect.width,
       height:rect.height,
       scrollX:0,
-      scrollY:-window.scrollY,
-      windowWidth:document.documentElement.clientWidth,
-      windowHeight:document.documentElement.clientHeight
+      scrollY:-window.scrollY
     });
+
     const finalCanvas=document.createElement("canvas");
-    finalCanvas.width=targetW;finalCanvas.height=targetH;
+    finalCanvas.width=targetW;
+    finalCanvas.height=targetH;
     const g=finalCanvas.getContext("2d");
-    g.imageSmoothingEnabled=true;g.imageSmoothingQuality="high";
+    g.imageSmoothingEnabled=true;
+    g.imageSmoothingQuality="high";
     g.drawImage(canvas,0,0,targetW,targetH);
+
     finalCanvas.toBlob(blob=>{
-      if(!blob)throw new Error("PNG creation failed");
+      if(!blob) throw new Error("PNG creation failed");
       download("declaration-card-300dpi.png",blob);
-      status.textContent="Exported 1013 × 638 PNG matching the card preview.";
+      status.textContent="Exported 1013 × 638 PNG.";
     },"image/png");
-  }catch(err){
-    console.error(err);
-    status.textContent="Export failed. Make sure the page is online so the export library can load.";
-    alert("Could not export the card image. Please reload while online and try again.");
+  }catch(error){
+    console.error(error);
+    status.textContent="Export failed. Reload while online and try again.";
+    alert("Could not export the card image.");
   }
 }
-exportPng.addEventListener("click",exportCardAsPng);
+$("exportPng").addEventListener("click",exportCardAsPng);
 
+if(!$("issueDate").value) $("issueDate").value=new Date().toISOString().slice(0,10);
+renderArchive();
+update();
 
-const ARCHIVE_KEY="ontarioDeclarationCardArchive.v2";
-function readArchive(){try{return JSON.parse(localStorage.getItem(ARCHIVE_KEY)||"[]")}catch(e){return[]}}
-function writeArchive(items){localStorage.setItem(ARCHIVE_KEY,JSON.stringify(items))}
-function newId(){return "rec-"+Date.now().toString(36)+"-"+Math.random().toString(36).slice(2,8)}
-function renderArchive(){const q=(archiveSearch.value||"").toLowerCase();const items=readArchive().filter(r=>[r.fullName,r.cardNo,r.marital,r.linkedIdType].join(" ").toLowerCase().includes(q));archiveList.innerHTML=items.length?"":"<div class='archive-item help'>No saved cards.</div>";items.sort((a,b)=>(b.updatedAt||"").localeCompare(a.updatedAt||"")).forEach(r=>{const div=document.createElement("div");div.className="archive-item";div.innerHTML=`<b>${r.fullName||"Unnamed"}</b><div class="help">${r.cardNo||"No card number"} • ${r.marital||"No status"} • ${r.updatedAt?new Date(r.updatedAt).toLocaleString():""}</div>`;const open=document.createElement("button");open.type="button";open.className="secondary";open.textContent="Open / update";open.addEventListener("click",()=>applyProject(r));const del=document.createElement("button");del.type="button";del.className="warn";del.textContent="Delete";del.addEventListener("click",()=>{if(confirm("Delete this saved card?")){writeArchive(readArchive().filter(x=>x.recordId!==r.recordId));renderArchive()}});div.append(open,del);archiveList.appendChild(div)})}
-saveArchive.addEventListener("click",()=>{const rec=getProject();if(!rec.recordId)rec.recordId=newId();state.recordId=rec.recordId;const items=readArchive();const i=items.findIndex(x=>x.recordId===rec.recordId);if(i>=0)items[i]=rec;else items.push(rec);writeArchive(items);renderArchive();alert("Card saved in this browser.")});
-archiveSearch.addEventListener("input",renderArchive);
-newCard.addEventListener("click",()=>{if(!confirm("Clear all fields and start a new card? Unsaved changes will be lost."))return;fields.forEach(id=>{const el=$(id);if(el.tagName==="SELECT")el.selectedIndex=0;else el.value=""});linkConsent.checked=false;state.photo="";state.seal="";state.signature="";state.recordId="";ctx.clearRect(0,0,pad.width,pad.height);declarationText.value="I solemnly declare that the information shown is true to the best of my knowledge and belief.";expiryText.value="Upon status change or change in information";issueDate.value=new Date().toISOString().slice(0,10);update()});
-exportArchive.addEventListener("click",()=>download("declaration-card-archive.json",new Blob([JSON.stringify({format:"OntarioDeclarationCardArchive",version:2,records:readArchive()},null,2)],{type:"application/json"})));
-importArchiveBtn.addEventListener("click",()=>importArchive.click());
-importArchive.addEventListener("change",()=>{const f=importArchive.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result),incoming=Array.isArray(d)?d:(d.records||[]),items=readArchive(),map=new Map(items.map(x=>[x.recordId||newId(),x]));incoming.forEach(x=>map.set(x.recordId||newId(),x));writeArchive([...map.values()]);renderArchive();alert("Archive imported.")}catch(e){alert("Could not import archive.")}};r.readAsText(f)});
-if(!issueDate.value){issueDate.value=new Date().toISOString().slice(0,10)}renderArchive();update();
 </script>
 </body>
 </html>
