@@ -31,6 +31,52 @@ button{border:0;border-radius:9px;padding:10px 12px;font-weight:800;cursor:point
 .line{border-bottom:1px solid #555;min-height:9px;margin:0 0 1px}.signature-canvas{width:100%;height:.35in;border:1px dashed #6d7680;background:#fff;touch-action:none}.ink-box{height:.22in;border-bottom:1px solid #333;margin-top:2px;position:relative}.ink-box span{position:absolute;bottom:1px;left:2px;font-size:4.9px;color:#555}
 .footer{position:absolute;left:0;right:0;bottom:0;height:.23in;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 .1in;font-size:5.7px}.badge{color:#ffe69c;font-weight:900}.notice{position:absolute;left:.10in;right:.10in;bottom:.405in;height:.12in;font-size:4.65px;line-height:1.03;text-align:center;color:#29333d;overflow:hidden}.seal-img{width:.25in;height:.25in;border-radius:50%;object-fit:contain;border:1px solid #99a3ae;float:right}.hidden{display:none!important}.archive-list{max-height:220px;overflow:auto;border:1px solid #d5dbe3;border-radius:9px;margin-top:8px}.archive-item{padding:9px;border-bottom:1px solid #e4e8ee}.archive-item:last-child{border-bottom:0}.archive-item button{padding:6px 8px;margin:4px 4px 0 0}.security-box{border:1px solid #9aa7b7;border-radius:8px;padding:10px;background:#f7f9fb}.fingerprint{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;word-break:break-all;background:#eef2f6;padding:8px;border-radius:6px}.linked-chip{position:absolute;left:1.18in;right:.10in;bottom:.285in;height:.105in;font-size:4.35px;line-height:1;text-align:right;border-top:1px solid #9aa5b1;padding-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.linked-chip.empty{display:none}
 @media(max-width:950px){.app{grid-template-columns:1fr}}@media print{body{background:#fff}.controls,.no-print{display:none!important}.app{display:block;padding:0}.panel{border:0;box-shadow:none;padding:0}.stage{padding:0}.card-wrap{width:3.375in}.card{box-shadow:none;border:.3pt solid #999}@page{size:3.375in 2.125in;margin:0}}
+
+/* Mobile/card layout surgery: reserve a clean lower band for declaration + linked record */
+.body{
+  height:1.14in;
+  padding:.05in .075in 0;
+  grid-template-columns:.72in minmax(0,1.23in) .98in;
+  gap:.05in;
+}
+.photo{width:.66in;height:.72in}
+.ink-box{height:.17in;margin-top:2px}
+.ink-box span{font-size:4.5px}
+.details{gap:2px}
+.detail-row{gap:4px}
+.field{font-size:5.65px;line-height:1.02}
+.field b{font-size:4.75px}
+.status{font-size:6.15px}
+.notary-box{font-size:4.7px;line-height:1;padding:.032in;gap:1px}
+.notary-box b{font-size:4.45px}
+.notary-value{min-height:6px}
+.line{min-height:7px}
+.seal-img{width:.22in;height:.22in}
+.notice{
+  left:.10in;
+  right:.10in;
+  bottom:.39in;
+  height:.13in;
+  font-size:4.55px;
+  line-height:1.05;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-top:1px solid #b8c0ca;
+  padding-top:2px;
+}
+.linked-chip{
+  left:.10in;
+  right:.10in;
+  bottom:.255in;
+  height:.105in;
+  font-size:4.25px;
+  line-height:1;
+  text-align:right;
+  border-top:1px solid #9aa5b1;
+  padding-top:2px;
+}
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 </head>
@@ -39,16 +85,16 @@ button{border:0;border-radius:9px;padding:10px 12px;font-weight:800;cursor:point
 <section class="panel controls">
 <h1>Declaration Card Designer</h1><div class="help">Private declaration credential only. Not government-issued identification.</div>
 <h2>Holder details</h2>
-<label>Full legal name<input id="fullName" type="text" value="Drew Barry John Simpson"></label>
-<div class="grid2"><label>Date of birth<input id="dob" type="date" value="1989-03-07"></label><label>Sex<input id="sex" type="text" value="Male"></label></div>
+<label>Full legal name<input id="fullName" type="text" value="Jane Example Citizen"></label>
+<div class="grid2"><label>Date of birth<input id="dob" type="date" value="1990-01-01"></label><label>Sex<input id="sex" type="text" value="X"></label></div>
 <label>Marital status<input id="marital" type="text" value="Single — Never Married"></label>
-<label>Place of birth<input id="birthPlace" type="text" value="Chatham-Kent, Ontario, Canada"></label>
-<label>Citizenship<input id="citizenship" type="text" value="Canadian citizen"></label>
-<label>Occupation<textarea id="occupation">Veteran, politician, logician, researcher and entertainment professional</textarea></label>
-<label>Residential address<textarea id="address">61-179 Sheldon Ave, Chatham, ON N7L 3N1, Canada</textarea></label>
+<label>Place of birth<input id="birthPlace" type="text" value="Sample City, Ontario, Canada"></label>
+<label>Citizenship<input id="citizenship" type="text" value="Example Citizen"></label>
+<label>Occupation<textarea id="occupation">Example Occupation</textarea></label>
+<label>Residential address<textarea id="address">100 Example Street, Sample City, ON A1A 1A1</textarea></label>
 <label>Photo<input id="photoInput" type="file" accept="image/*"></label>
 <h2>Declaration details</h2>
-<label>Card / declaration number<input id="cardNo" type="text" value="ON-DC-2026-000001"></label>
+<label>Card / declaration number<input id="cardNo" type="text" value="ON-DC-YYYY-000001"></label>
 <div class="grid2"><label>Issue date<input id="issueDate" type="date"></label><label>Review date<input id="reviewDate" type="date"></label></div>
 <label>Expiry wording<input id="expiryText" type="text" value="Upon status change or change in information"></label>
 <label>Declaration wording<textarea id="declarationText">I solemnly declare that the information shown is true to the best of my knowledge and belief.</textarea></label>
@@ -65,9 +111,9 @@ button{border:0;border-radius:9px;padding:10px 12px;font-weight:800;cursor:point
 </div>
 
 <h2>Notary / commissioner</h2>
-<label>Name<input id="notaryName" type="text" value="Alex Morgan"></label>
+<label>Name<input id="notaryName" type="text" value="Jane Notary"></label>
 <label>Capacity<select id="capacity"><option>Notary Public</option><option>Commissioner for Taking Affidavits</option><option>Licensed Paralegal and Commissioner</option></select></label>
-<label>Licence / appointment number<input id="licenceNo" type="text" value="NP-123456"></label>
+<label>Licence / appointment number<input id="licenceNo" type="text" value="NP-000000"></label>
 <div class="grid2"><label>Appointment expiry<input id="appointmentExpiry" type="date"></label><label>Business phone<input id="notaryPhone" type="text" placeholder="Optional"></label></div>
 <label>Business / professional address<textarea id="notaryAddress" placeholder="Optional"></textarea></label>
 <label>Optional seal or logo image<input id="sealInput" type="file" accept="image/*"></label>
@@ -214,11 +260,6 @@ function newId(){return "rec-"+Date.now().toString(36)+"-"+Math.random().toStrin
 function renderArchive(){const q=(archiveSearch.value||"").toLowerCase();const items=readArchive().filter(r=>[r.fullName,r.cardNo,r.marital,r.linkedIdType].join(" ").toLowerCase().includes(q));archiveList.innerHTML=items.length?"":"<div class='archive-item help'>No saved cards.</div>";items.sort((a,b)=>(b.updatedAt||"").localeCompare(a.updatedAt||"")).forEach(r=>{const div=document.createElement("div");div.className="archive-item";div.innerHTML=`<b>${r.fullName||"Unnamed"}</b><div class="help">${r.cardNo||"No card number"} • ${r.marital||"No status"} • ${r.updatedAt?new Date(r.updatedAt).toLocaleString():""}</div>`;const open=document.createElement("button");open.type="button";open.className="secondary";open.textContent="Open / update";open.addEventListener("click",()=>applyProject(r));const del=document.createElement("button");del.type="button";del.className="warn";del.textContent="Delete";del.addEventListener("click",()=>{if(confirm("Delete this saved card?")){writeArchive(readArchive().filter(x=>x.recordId!==r.recordId));renderArchive()}});div.append(open,del);archiveList.appendChild(div)})}
 saveArchive.addEventListener("click",()=>{const rec=getProject();if(!rec.recordId)rec.recordId=newId();state.recordId=rec.recordId;const items=readArchive();const i=items.findIndex(x=>x.recordId===rec.recordId);if(i>=0)items[i]=rec;else items.push(rec);writeArchive(items);renderArchive();alert("Card saved in this browser.")});
 archiveSearch.addEventListener("input",renderArchive);
-newCard.addEventListener("click",()=>{if(!confirm("Clear all fields and start a new card? Unsaved changes will be lost."))return;fields.forEach(id=>{const el=$(id);if(el.tagName==="SELECT")el.selectedIndex=0;else el.value=""});linkConsent.checked=false;state.photo="";state.seal="";state.signature="";state.recordId="";ctx.clearRect(0,0,pad.width,pad.height);declarationText.value="I solemnly declare that the information shown is true to the best of my knowledge and belief.";expiryText.value="Upon status change or change in information";issueDate.value=new Date().toISOString().slice(0,10);update()});
-exportArchive.addEventListener("click",()=>download("declaration-card-archive.json",new Blob([JSON.stringify({format:"OntarioDeclarationCardArchive",version:2,records:readArchive()},null,2)],{type:"application/json"})));
-importArchiveBtn.addEventListener("click",()=>importArchive.click());
-importArchive.addEventListener("change",()=>{const f=importArchive.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result),incoming=Array.isArray(d)?d:(d.records||[]),items=readArchive(),map=new Map(items.map(x=>[x.recordId||newId(),x]));incoming.forEach(x=>map.set(x.recordId||newId(),x));writeArchive([...map.values()]);renderArchive();alert("Archive imported.")}catch(e){alert("Could not import archive.")}};r.readAsText(f)});
-if(!issueDate.value){issueDate.value=new Date().toISOString().slice(0,10)}renderArchive();update();
-</script>
+newCard.addEventListener("click",()=>{if(!confirm("Clear all fields and start a new card? Unsaved changes will be lost."))return;fields.forEach(id=>{const el=$(id);if(el.tagName==="SELECT")el.selectedIndex=0;else el.value=""});linkConsent.checked=false;state.photo="";state.seal="";state.signature="";state.recordId="";ctx.clearRect(0,0,pad.width,pad.height);declarationText.value="I solemnly declare that the information shown is true to the best of my knowledge and belief.</script>
 </body>
 </html>
