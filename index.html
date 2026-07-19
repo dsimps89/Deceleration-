@@ -186,7 +186,50 @@ function fmtDate(v){if(!v)return"—";const d=new Date(v+"T12:00:00");return d.t
 function placeholderPhoto(){return"data:image/svg+xml;charset=utf-8,"+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="300" height="360"><rect width="100%" height="100%" fill="#dde3ea"/><circle cx="150" cy="115" r="58" fill="#aeb8c5"/><rect x="65" y="190" width="170" height="130" rx="70" fill="#aeb8c5"/><text x="150" y="342" text-anchor="middle" font-family="Arial" font-size="18" fill="#52606d">PHOTO</text></svg>`)}
 function placeholderSeal(){return"data:image/svg+xml;charset=utf-8,"+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180"><circle cx="90" cy="90" r="82" fill="#fff" stroke="#b89248" stroke-width="7"/><circle cx="90" cy="90" r="58" fill="none" stroke="#10284a" stroke-width="4"/><text x="90" y="84" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="20" fill="#10284a">SEAL</text><text x="90" y="110" text-anchor="middle" font-family="Arial" font-size="14" fill="#10284a">OPTIONAL</text></svg>`)}
 function blankSignature(){return"data:image/svg+xml;charset=utf-8,"+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="600" height="150"></svg>`)}
-async function makeFingerprint(){const payload=[fullName.value,dob.value,marital.value,cardNo.value,linkedIdType.value,linkedIssuer.value,linkedRef.value,linkedExpiry.value,statusEvidenceType.value,statusEvidenceRef.value,issueDate.value].join("|");if(!payload.replace(/\|/g,"")){fingerprint.textContent="Not generated";vFingerprint.textContent="—";return}const data=new TextEncoder().encode(payload);const digest=await crypto.subtle.digest("SHA-256",data);const hex=[...new Uint8Array(digest)].map(b=>b.toString(16).padStart(2,"0")).join("");fingerprint.textContent=hex;vFingerprint.textContent=hex.slice(0,16).toUpperCase()}
+async function makeFingerprint(){
+  const get=id=>$(id)?.value||"";
+  const payload=[
+    get("fullName"),get("dob"),get("marital"),get("cardNo"),
+    get("linkedIdType"),get("linkedIssuer"),get("linkedRef"),
+    get("linkedExpiry"),get("statusEvidenceType"),
+    get("statusEvidenceRef"),get("issueDate")
+  ].join("|");
+
+  const fullOutput=$("fingerprint");
+  const cardOutput=$("vFingerprint");
+
+  if(!payload.replace(/\|/g,"")){
+    if(fullOutput) fullOutput.textContent="Not generated";
+    if(cardOutput) cardOutput.textContent="—";
+    return;
+  }
+
+  try{
+    if(window.crypto?.subtle && window.TextEncoder){
+      const data=new TextEncoder().encode(payload);
+      const digest=await crypto.subtle.digest("SHA-256",data);
+      const hex=[...new Uint8Array(digest)]
+        .map(b=>b.toString(16).padStart(2,"0")).join("");
+      if(fullOutput) fullOutput.textContent=hex;
+      if(cardOutput) cardOutput.textContent=hex.slice(0,16).toUpperCase();
+      return;
+    }
+  }catch(err){
+    console.warn("SHA-256 fingerprint unavailable; using local fallback.",err);
+  }
+
+  // Compatibility fallback for browsers or non-secure local previews.
+  let h1=0x811c9dc5,h2=0x9e3779b9;
+  for(let i=0;i<payload.length;i++){
+    const c=payload.charCodeAt(i);
+    h1=Math.imul(h1^c,0x01000193)>>>0;
+    h2=Math.imul(h2+c+(h2<<6)+(h2>>>2),0x85ebca6b)>>>0;
+  }
+  const shortHex=(h1.toString(16).padStart(8,"0")+h2.toString(16).padStart(8,"0")).toUpperCase();
+  const display=shortHex.match(/.{1,4}/g).join("-");
+  if(fullOutput) fullOutput.textContent=display+" (local compatibility fingerprint)";
+  if(cardOutput) cardOutput.textContent=shortHex;
+}
 
 function fitCardText(){
   const card=$("card");
@@ -207,7 +250,38 @@ linkedChip.classList.toggle("empty",!linked);
 makeFingerprint()}
 fields.forEach(id=>$(id).addEventListener("input",update));
 function fileToData(input,key){const f=input.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{state[key]=r.result;update()};r.readAsDataURL(f)}photoInput.addEventListener("change",()=>fileToData(photoInput,"photo"));sealInput.addEventListener("change",()=>fileToData(sealInput,"seal"));
-const pad=signPad,ctx=pad.getContext("2d");ctx.lineWidth=4;ctx.lineCap="round";ctx.strokeStyle="#111";let drawing=false;function pos(e){const r=pad.getBoundingClientRect(),p=e.touches?e.touches[0]:e;return{x:(p.clientX-r.left)*pad.width/r.width,y:(p.clientY-r.top)*pad.height/r.height}}function start(e){drawing=true;const p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);e.preventDefault()}function move(e){if(!drawing)return;const p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke();state.signature=pad.toDataURL("image/png");update();e.preventDefault()}function end(){drawing=false}pad.addEventListener("mousedown",start);pad.addEventListener("mousemove",move);window.addEventListener("mouseup",end);pad.addEventListener("touchstart",start,{passive:false});pad.addEventListener("touchmove",move,{passive:false});pad.addEventListener("touchend",end);clearSig.addEventListener("click",()=>{ctx.clearRect(0,0,pad.width,pad.height);state.signature="";update()});
+const pad=$("signPad"),ctx=pad.getContext("2d");
+ctx.lineWidth=4;ctx.lineCap="round";ctx.lineJoin="round";ctx.strokeStyle="#111";
+let drawing=false;
+function pos(e){
+  const r=pad.getBoundingClientRect();
+  return{x:(e.clientX-r.left)*pad.width/r.width,y:(e.clientY-r.top)*pad.height/r.height};
+}
+function start(e){
+  drawing=true;
+  pad.setPointerCapture?.(e.pointerId);
+  const p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);
+  e.preventDefault();
+}
+function move(e){
+  if(!drawing)return;
+  const p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke();
+  state.signature=pad.toDataURL("image/png");
+  sigPreview.src=state.signature;
+  e.preventDefault();
+}
+function end(e){
+  if(!drawing)return;
+  drawing=false;
+  state.signature=pad.toDataURL("image/png");
+  update();
+  pad.releasePointerCapture?.(e.pointerId);
+}
+pad.addEventListener("pointerdown",start);
+pad.addEventListener("pointermove",move);
+pad.addEventListener("pointerup",end);
+pad.addEventListener("pointercancel",end);
+$("clearSig").addEventListener("click",()=>{ctx.clearRect(0,0,pad.width,pad.height);state.signature="";update()});
 function getProject(){const d={};fields.forEach(id=>d[id]=$(id).value);d.linkConsent=linkConsent.checked;return{...d,...state,version:2,updatedAt:new Date().toISOString()}}function applyProject(d){fields.forEach(id=>{if(d[id]!=null)$(id).value=d[id]});linkConsent.checked=!!d.linkConsent;state.photo=d.photo||"";state.seal=d.seal||"";state.signature=d.signature||"";state.recordId=d.recordId||"";ctx.clearRect(0,0,pad.width,pad.height);if(state.signature){const im=new Image();im.onload=()=>ctx.drawImage(im,0,0,pad.width,pad.height);im.src=state.signature}update()}
 function download(name,blob){const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}saveProject.addEventListener("click",()=>download("declaration-card-project.json",new Blob([JSON.stringify(getProject(),null,2)],{type:"application/json"})));loadProjectBtn.addEventListener("click",()=>loadProject.click());loadProject.addEventListener("change",()=>{const f=loadProject.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{applyProject(JSON.parse(r.result))}catch(e){alert("Could not load project file.")}};r.readAsText(f)});printCard.addEventListener("click",()=>window.print());
 exportHtml.addEventListener("click",()=>{const clone=document.documentElement.cloneNode(true);clone.querySelector("body").insertAdjacentHTML("beforeend",`<script>window.addEventListener("DOMContentLoaded",()=>{try{applyProject(${JSON.stringify(getProject())})}catch(e){}});<\/script>`);download("editable-declaration-card.html",new Blob(["<!doctype html>\n"+clone.outerHTML],{type:"text/html"}))});
@@ -260,6 +334,11 @@ function newId(){return "rec-"+Date.now().toString(36)+"-"+Math.random().toStrin
 function renderArchive(){const q=(archiveSearch.value||"").toLowerCase();const items=readArchive().filter(r=>[r.fullName,r.cardNo,r.marital,r.linkedIdType].join(" ").toLowerCase().includes(q));archiveList.innerHTML=items.length?"":"<div class='archive-item help'>No saved cards.</div>";items.sort((a,b)=>(b.updatedAt||"").localeCompare(a.updatedAt||"")).forEach(r=>{const div=document.createElement("div");div.className="archive-item";div.innerHTML=`<b>${r.fullName||"Unnamed"}</b><div class="help">${r.cardNo||"No card number"} • ${r.marital||"No status"} • ${r.updatedAt?new Date(r.updatedAt).toLocaleString():""}</div>`;const open=document.createElement("button");open.type="button";open.className="secondary";open.textContent="Open / update";open.addEventListener("click",()=>applyProject(r));const del=document.createElement("button");del.type="button";del.className="warn";del.textContent="Delete";del.addEventListener("click",()=>{if(confirm("Delete this saved card?")){writeArchive(readArchive().filter(x=>x.recordId!==r.recordId));renderArchive()}});div.append(open,del);archiveList.appendChild(div)})}
 saveArchive.addEventListener("click",()=>{const rec=getProject();if(!rec.recordId)rec.recordId=newId();state.recordId=rec.recordId;const items=readArchive();const i=items.findIndex(x=>x.recordId===rec.recordId);if(i>=0)items[i]=rec;else items.push(rec);writeArchive(items);renderArchive();alert("Card saved in this browser.")});
 archiveSearch.addEventListener("input",renderArchive);
-newCard.addEventListener("click",()=>{if(!confirm("Clear all fields and start a new card? Unsaved changes will be lost."))return;fields.forEach(id=>{const el=$(id);if(el.tagName==="SELECT")el.selectedIndex=0;else el.value=""});linkConsent.checked=false;state.photo="";state.seal="";state.signature="";state.recordId="";ctx.clearRect(0,0,pad.width,pad.height);declarationText.value="I solemnly declare that the information shown is true to the best of my knowledge and belief.</script>
+newCard.addEventListener("click",()=>{if(!confirm("Clear all fields and start a new card? Unsaved changes will be lost."))return;fields.forEach(id=>{const el=$(id);if(el.tagName==="SELECT")el.selectedIndex=0;else el.value=""});linkConsent.checked=false;state.photo="";state.seal="";state.signature="";state.recordId="";ctx.clearRect(0,0,pad.width,pad.height);declarationText.value="I solemnly declare that the information shown is true to the best of my knowledge and belief.";expiryText.value="Upon status change or change in information";issueDate.value=new Date().toISOString().slice(0,10);update()});
+exportArchive.addEventListener("click",()=>download("declaration-card-archive.json",new Blob([JSON.stringify({format:"OntarioDeclarationCardArchive",version:2,records:readArchive()},null,2)],{type:"application/json"})));
+importArchiveBtn.addEventListener("click",()=>importArchive.click());
+importArchive.addEventListener("change",()=>{const f=importArchive.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result),incoming=Array.isArray(d)?d:(d.records||[]),items=readArchive(),map=new Map(items.map(x=>[x.recordId||newId(),x]));incoming.forEach(x=>map.set(x.recordId||newId(),x));writeArchive([...map.values()]);renderArchive();alert("Archive imported.")}catch(e){alert("Could not import archive.")}};r.readAsText(f)});
+if(!issueDate.value){issueDate.value=new Date().toISOString().slice(0,10)}renderArchive();update();
+</script>
 </body>
 </html>
