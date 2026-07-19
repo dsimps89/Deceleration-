@@ -13,24 +13,25 @@ input[type=text],input[type=date],textarea,select{width:100%;border:1px solid #b
 button{border:0;border-radius:9px;padding:10px 12px;font-weight:800;cursor:pointer}.primary{background:var(--navy);color:#fff}.secondary{background:#eef2f6;color:#17202a;border:1px solid #cbd3dd}.warn{background:#fff4df;color:#6c4600;border:1px solid #dfc48a}
 .stage{display:flex;justify-content:center;padding:8px;overflow:auto}.card-wrap{width:3.375in}.card{width:3.375in;height:2.125in;background:var(--paper);border:1px solid #adb5bf;border-radius:.12in;overflow:hidden;position:relative;color:#111;box-shadow:0 4px 15px rgba(0,0,0,.2)}
 .card .header{height:.42in;background:var(--navy);color:#fff;padding:.08in .12in;display:flex;align-items:center;justify-content:space-between}.title{font-weight:900;font-size:13px;letter-spacing:.4px;line-height:1.05}.subtitle{font-size:7px;color:#eedba6;margin-top:3px}.logo{width:.28in;height:.28in;border-radius:50%;background:#fff;border:2px solid var(--gold);object-fit:cover}
-.body{display:grid;grid-template-columns:.87in 1fr 1.03in;gap:.07in;padding:.08in .09in .04in}.photo{width:.78in;height:.94in;border:1px solid #8f98a3;border-radius:.06in;object-fit:cover;background:#dde3ea}.field{font-size:7.2px;line-height:1.12;margin-bottom:4px}.field b{display:block;font-size:6px;color:#3b4a5a;text-transform:uppercase;letter-spacing:.25px}.status{font-size:8px;font-weight:900;color:#0d3f73}
-.notary-box{border:1px solid #718096;border-radius:.06in;padding:.05in;background:#fff;font-size:6.2px;line-height:1.16}.line{border-bottom:1px solid #555;min-height:12px;margin:2px 0 5px}.signature-canvas{width:100%;height:.35in;border:1px dashed #6d7680;background:#fff;touch-action:none}.ink-box{height:.31in;border-bottom:1px solid #333;margin-top:3px;position:relative}.ink-box span{position:absolute;bottom:1px;left:3px;font-size:5.7px;color:#555}
-.footer{position:absolute;left:0;right:0;bottom:0;height:.23in;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 .1in;font-size:5.7px}.badge{color:#ffe69c;font-weight:900}.notice{font-size:6px;text-align:center;margin:.03in .08in 0;color:#29333d}.seal-img{width:.32in;height:.32in;border-radius:50%;object-fit:contain;border:1px solid #99a3ae;float:right}.hidden{display:none!important}.archive-list{max-height:220px;overflow:auto;border:1px solid #d5dbe3;border-radius:9px;margin-top:8px}.archive-item{padding:9px;border-bottom:1px solid #e4e8ee}.archive-item:last-child{border-bottom:0}.archive-item button{padding:6px 8px;margin:4px 4px 0 0}.security-box{border:1px solid #9aa7b7;border-radius:8px;padding:10px;background:#f7f9fb}.fingerprint{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;word-break:break-all;background:#eef2f6;padding:8px;border-radius:6px}.linked-chip{font-size:5.8px;line-height:1.15;border:1px solid #7d8996;border-radius:4px;padding:3px;margin-top:4px;background:#f8fafc}
+.body{display:grid;grid-template-columns:.78in minmax(0,1fr) .98in;gap:.055in;padding:.065in .075in .025in;height:1.36in;overflow:hidden}.body>div{min-width:0;overflow:hidden}.photo{width:.70in;height:.82in;border:1px solid #8f98a3;border-radius:.055in;object-fit:cover;background:#dde3ea}.field{font-size:6.25px;line-height:1.03;margin-bottom:2.3px;overflow-wrap:anywhere}.field b{display:block;font-size:5.25px;line-height:1;color:#3b4a5a;text-transform:uppercase;letter-spacing:.2px}.status{font-size:6.75px;font-weight:900;color:#0d3f73}.field span{display:block;max-height:2.1em;overflow:hidden}
+.notary-box{border:1px solid #718096;border-radius:.055in;padding:.042in;background:#fff;font-size:5.35px;line-height:1.06;overflow:hidden}.notary-box b{font-size:5px;line-height:1}.notary-box>div{margin-bottom:1.5px;max-height:1.2em;overflow:hidden}.line{border-bottom:1px solid #555;min-height:9px;margin:1px 0 3px}.signature-canvas{width:100%;height:.35in;border:1px dashed #6d7680;background:#fff;touch-action:none}.ink-box{height:.22in;border-bottom:1px solid #333;margin-top:2px;position:relative}.ink-box span{position:absolute;bottom:1px;left:2px;font-size:4.9px;color:#555}
+.footer{position:absolute;left:0;right:0;bottom:0;height:.23in;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 .1in;font-size:5.7px}.badge{color:#ffe69c;font-weight:900}.notice{position:absolute;left:.08in;right:.08in;bottom:.245in;height:.19in;font-size:5.25px;line-height:1.05;text-align:center;color:#29333d;overflow:hidden}.seal-img{width:.25in;height:.25in;border-radius:50%;object-fit:contain;border:1px solid #99a3ae;float:right}.hidden{display:none!important}.archive-list{max-height:220px;overflow:auto;border:1px solid #d5dbe3;border-radius:9px;margin-top:8px}.archive-item{padding:9px;border-bottom:1px solid #e4e8ee}.archive-item:last-child{border-bottom:0}.archive-item button{padding:6px 8px;margin:4px 4px 0 0}.security-box{border:1px solid #9aa7b7;border-radius:8px;padding:10px;background:#f7f9fb}.fingerprint{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;word-break:break-all;background:#eef2f6;padding:8px;border-radius:6px}.linked-chip{font-size:4.9px;line-height:1.05;border:1px solid #7d8996;border-radius:3px;padding:2px;margin-top:2px;background:#f8fafc;max-height:.26in;overflow:hidden}
 @media(max-width:950px){.app{grid-template-columns:1fr}}@media print{body{background:#fff}.controls,.no-print{display:none!important}.app{display:block;padding:0}.panel{border:0;box-shadow:none;padding:0}.stage{padding:0}.card-wrap{width:3.375in}.card{box-shadow:none;border:.3pt solid #999}@page{size:3.375in 2.125in;margin:0}}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 </head>
 <body>
 <div class="app">
 <section class="panel controls">
 <h1>Declaration Card Designer</h1><div class="help">Private declaration credential only. Not government-issued identification.</div>
 <h2>Holder details</h2>
-<label>Full legal name<input id="fullName" type="text" value="Jane Doe"></label>
-<div class="grid2"><label>Date of birth<input id="dob" type="date" value="2010-03-07"></label><label>Sex<input id="sex" type="text" value="Male"></label></div>
+<label>Full legal name<input id="fullName" type="text" value="Jordan Avery Morgan"></label>
+<div class="grid2"><label>Date of birth<input id="dob" type="date" value="1992-01-15"></label><label>Sex<input id="sex" type="text" value="X"></label></div>
 <label>Marital status<input id="marital" type="text" value="Single — Never Married"></label>
-<label>Place of birth<input id="birthPlace" type="text" value="Chatham-Kent, Ontario, Canada"></label>
+<label>Place of birth<input id="birthPlace" type="text" value="Example City, Ontario, Canada"></label>
 <label>Citizenship<input id="citizenship" type="text" value="Canadian citizen"></label>
-<label>Occupation<textarea id="occupation">Veteran, politician, logician, researcher and entertainment professional</textarea></label>
-<label>Residential address<textarea id="address">000 Blank Ave, City, ON N6G 3N1, Canada</textarea></label>
+<label>Occupation<textarea id="occupation">Example occupation</textarea></label>
+<label>Residential address<textarea id="address">123 Example Street, Example City, ON A1A 1A1, Canada</textarea></label>
 <label>Photo<input id="photoInput" type="file" accept="image/*"></label>
 <h2>Declaration details</h2>
 <label>Card / declaration number<input id="cardNo" type="text" value="ON-DC-2026-000001"></label>
@@ -50,9 +51,9 @@ button{border:0;border-radius:9px;padding:10px 12px;font-weight:800;cursor:point
 </div>
 
 <h2>Notary / commissioner</h2>
-<label>Name<input id="notaryName" type="text" placeholder="Write full name"></label>
+<label>Name<input id="notaryName" type="text" value="Alex Morgan"></label>
 <label>Capacity<select id="capacity"><option>Notary Public</option><option>Commissioner for Taking Affidavits</option><option>Licensed Paralegal and Commissioner</option></select></label>
-<label>Licence / appointment number<input id="licenceNo" type="text" placeholder="Enter licence or appointment number"></label>
+<label>Licence / appointment number<input id="licenceNo" type="text" value="NP-123456"></label>
 <div class="grid2"><label>Appointment expiry<input id="appointmentExpiry" type="date"></label><label>Business phone<input id="notaryPhone" type="text" placeholder="Optional"></label></div>
 <label>Business / professional address<textarea id="notaryAddress" placeholder="Optional"></textarea></label>
 <label>Optional seal or logo image<input id="sealInput" type="file" accept="image/*"></label>
@@ -67,7 +68,7 @@ button{border:0;border-radius:9px;padding:10px 12px;font-weight:800;cursor:point
 <div id="archiveList" class="archive-list"></div>
 
 <h2>Project and export</h2>
-<div class="actions"><button class="primary" id="saveProject" type="button">Save project JSON</button><button class="secondary" id="loadProjectBtn" type="button">Load project</button><input id="loadProject" type="file" accept=".json,application/json" class="hidden"><button class="primary" id="exportPng" type="button">Export 300 DPI PNG</button><button class="secondary" id="printCard" type="button">Print / Save PDF</button><button class="warn" id="exportHtml" type="button">Export editable HTML</button></div>
+<div class="actions"><button class="primary" id="saveProject" type="button">Save project JSON</button><button class="secondary" id="loadProjectBtn" type="button">Load project</button><input id="loadProject" type="file" accept=".json,application/json" class="hidden"><button class="primary" id="exportPng" type="button">Export matching 300 DPI PNG</button><button class="secondary" id="printCard" type="button">Print / Save PDF</button><button class="warn" id="exportHtml" type="button">Export editable HTML</button></div>
 </section>
 <section class="panel">
 <div class="stage"><div class="card-wrap"><div class="card" id="card">
@@ -78,7 +79,7 @@ button{border:0;border-radius:9px;padding:10px 12px;font-weight:800;cursor:point
 <div class="notary-box"><img id="sealPreview" class="seal-img" alt=""><b>NOTARY / COMMISSIONER</b><div id="vNotaryName" class="line"></div><b>Capacity</b><div id="vCapacity"></div><b>Licence / appointment no.</b><div id="vLicence"></div><b>Appointment expiry</b><div id="vAppointmentExpiry"></div><b>Issue date</b><div id="vIssueDate"></div><b>Review date</b><div id="vReviewDate"></div><b>Notary signature</b><img id="sigPreview" style="width:100%;height:.28in;object-fit:contain;border-bottom:1px solid #555" alt="Notary signature"></div>
 </div><div class="notice" id="vDeclaration"></div><div class="footer"><span id="vCardNo"></span><span class="badge">NOT GOVERNMENT ID</span><span id="vExpiry"></span></div>
 </div></div></div>
-<p class="help no-print">CR80 card size: 3.375 × 2.125 inches. PNG export is 1013 × 638 pixels for 300 DPI workflows.</p>
+<p class="help no-print">CR80 card size: 3.375 × 2.125 inches. The PNG exporter captures the actual card DOM at 1013 × 638 pixels so it matches the preview.</p><div id="exportStatus" class="help no-print" aria-live="polite"></div>
 </section></div>
 <script>
 const $=id=>document.getElementById(id);const fields=["fullName","dob","sex","marital","birthPlace","citizenship","occupation","address","cardNo","issueDate","reviewDate","expiryText","declarationText","linkedIdType","linkedIssuer","linkedRef","linkedExpiry","statusEvidenceType","statusEvidenceRef","notaryName","capacity","licenceNo","appointmentExpiry","notaryPhone","notaryAddress"];const state={photo:"",seal:"",signature:"",recordId:""};
@@ -87,15 +88,68 @@ function placeholderPhoto(){return"data:image/svg+xml;charset=utf-8,"+encodeURIC
 function placeholderSeal(){return"data:image/svg+xml;charset=utf-8,"+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180"><circle cx="90" cy="90" r="82" fill="#fff" stroke="#b89248" stroke-width="7"/><circle cx="90" cy="90" r="58" fill="none" stroke="#10284a" stroke-width="4"/><text x="90" y="84" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="20" fill="#10284a">SEAL</text><text x="90" y="110" text-anchor="middle" font-family="Arial" font-size="14" fill="#10284a">OPTIONAL</text></svg>`)}
 function blankSignature(){return"data:image/svg+xml;charset=utf-8,"+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="600" height="150"></svg>`)}
 async function makeFingerprint(){const payload=[fullName.value,dob.value,marital.value,cardNo.value,linkedIdType.value,linkedIssuer.value,linkedRef.value,linkedExpiry.value,statusEvidenceType.value,statusEvidenceRef.value,issueDate.value].join("|");if(!payload.replace(/\|/g,"")){fingerprint.textContent="Not generated";vFingerprint.textContent="—";return}const data=new TextEncoder().encode(payload);const digest=await crypto.subtle.digest("SHA-256",data);const hex=[...new Uint8Array(digest)].map(b=>b.toString(16).padStart(2,"0")).join("");fingerprint.textContent=hex;vFingerprint.textContent=hex.slice(0,16).toUpperCase()}
-function update(){vFullName.textContent=fullName.value;vDob.textContent=fmtDate(dob.value);vSex.textContent=sex.value;vMarital.textContent=marital.value;vBirthPlace.textContent=birthPlace.value;vCitizenship.textContent=citizenship.value;vOccupation.textContent=occupation.value;vAddress.textContent=address.value;vCardNo.textContent=cardNo.value;vIssueDate.textContent=fmtDate(issueDate.value);vReviewDate.textContent=fmtDate(reviewDate.value);vExpiry.textContent=expiryText.value;vDeclaration.textContent=declarationText.value;vNotaryName.textContent=notaryName.value||" ";vCapacity.textContent=capacity.value;vLicence.textContent=licenceNo.value||"—";vAppointmentExpiry.textContent=fmtDate(appointmentExpiry.value);photoPreview.src=state.photo||placeholderPhoto();logoPreview.src=state.seal||placeholderSeal();sealPreview.src=state.seal||placeholderSeal();sigPreview.src=state.signature||blankSignature();const linked=[linkedIdType.value,linkedIssuer.value,linkedRef.value?("ref "+linkedRef.value):"",statusEvidenceType.value,statusEvidenceRef.value].filter(Boolean).join(" • ");vLinked.textContent=linked||"No linked record";makeFingerprint()}
+
+function fitCardText(){
+  const card=$("card");
+  const fields=card.querySelectorAll(".field span,.linked-chip,.notice,.notary-box>div");
+  fields.forEach(el=>{
+    el.style.fontSize="";
+    let size=parseFloat(getComputedStyle(el).fontSize);
+    let guard=0;
+    while((el.scrollHeight>el.clientHeight+1||el.scrollWidth>el.clientWidth+1)&&size>4&&guard<12){
+      size-=.25;el.style.fontSize=size+"px";guard++;
+    }
+  });
+}
+
+function update(){vFullName.textContent=fullName.value;vDob.textContent=fmtDate(dob.value);vSex.textContent=sex.value;vMarital.textContent=marital.value;vBirthPlace.textContent=birthPlace.value;vCitizenship.textContent=citizenship.value;vOccupation.textContent=occupation.value;vAddress.textContent=address.value;vCardNo.textContent=cardNo.value;vIssueDate.textContent=fmtDate(issueDate.value);vReviewDate.textContent=fmtDate(reviewDate.value);vExpiry.textContent=expiryText.value;vDeclaration.textContent=declarationText.value;vNotaryName.textContent=notaryName.value||" ";vCapacity.textContent=capacity.value;vLicence.textContent=licenceNo.value||"—";vAppointmentExpiry.textContent=fmtDate(appointmentExpiry.value);photoPreview.src=state.photo||placeholderPhoto();logoPreview.src=state.seal||placeholderSeal();sealPreview.src=state.seal||placeholderSeal();sigPreview.src=state.signature||blankSignature();fitCardText();const linked=[linkedIdType.value,linkedIssuer.value,linkedRef.value?("ref "+linkedRef.value):"",statusEvidenceType.value,statusEvidenceRef.value].filter(Boolean).join(" • ");vLinked.textContent=linked||"No linked record";makeFingerprint()}
 fields.forEach(id=>$(id).addEventListener("input",update));
 function fileToData(input,key){const f=input.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{state[key]=r.result;update()};r.readAsDataURL(f)}photoInput.addEventListener("change",()=>fileToData(photoInput,"photo"));sealInput.addEventListener("change",()=>fileToData(sealInput,"seal"));
 const pad=signPad,ctx=pad.getContext("2d");ctx.lineWidth=4;ctx.lineCap="round";ctx.strokeStyle="#111";let drawing=false;function pos(e){const r=pad.getBoundingClientRect(),p=e.touches?e.touches[0]:e;return{x:(p.clientX-r.left)*pad.width/r.width,y:(p.clientY-r.top)*pad.height/r.height}}function start(e){drawing=true;const p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);e.preventDefault()}function move(e){if(!drawing)return;const p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke();state.signature=pad.toDataURL("image/png");update();e.preventDefault()}function end(){drawing=false}pad.addEventListener("mousedown",start);pad.addEventListener("mousemove",move);window.addEventListener("mouseup",end);pad.addEventListener("touchstart",start,{passive:false});pad.addEventListener("touchmove",move,{passive:false});pad.addEventListener("touchend",end);clearSig.addEventListener("click",()=>{ctx.clearRect(0,0,pad.width,pad.height);state.signature="";update()});
 function getProject(){const d={};fields.forEach(id=>d[id]=$(id).value);d.linkConsent=linkConsent.checked;return{...d,...state,version:2,updatedAt:new Date().toISOString()}}function applyProject(d){fields.forEach(id=>{if(d[id]!=null)$(id).value=d[id]});linkConsent.checked=!!d.linkConsent;state.photo=d.photo||"";state.seal=d.seal||"";state.signature=d.signature||"";state.recordId=d.recordId||"";ctx.clearRect(0,0,pad.width,pad.height);if(state.signature){const im=new Image();im.onload=()=>ctx.drawImage(im,0,0,pad.width,pad.height);im.src=state.signature}update()}
 function download(name,blob){const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}saveProject.addEventListener("click",()=>download("declaration-card-project.json",new Blob([JSON.stringify(getProject(),null,2)],{type:"application/json"})));loadProjectBtn.addEventListener("click",()=>loadProject.click());loadProject.addEventListener("change",()=>{const f=loadProject.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{applyProject(JSON.parse(r.result))}catch(e){alert("Could not load project file.")}};r.readAsText(f)});printCard.addEventListener("click",()=>window.print());
 exportHtml.addEventListener("click",()=>{const clone=document.documentElement.cloneNode(true);clone.querySelector("body").insertAdjacentHTML("beforeend",`<script>window.addEventListener("DOMContentLoaded",()=>{try{applyProject(${JSON.stringify(getProject())})}catch(e){}});<\/script>`);download("editable-declaration-card.html",new Blob(["<!doctype html>\n"+clone.outerHTML],{type:"text/html"}))});
-function wrapText(c,text,x,y,maxWidth,lineHeight,maxLines){const words=String(text||"").split(/\s+/);let line="",lines=[];for(const w of words){const test=line?line+" "+w:w;if(c.measureText(test).width>maxWidth&&line){lines.push(line);line=w}else line=test}if(line)lines.push(line);lines=lines.slice(0,maxLines);lines.forEach((l,i)=>c.fillText(l,x,y+i*lineHeight))}function drawImageCover(c,img,x,y,w,h){const s=Math.max(w/img.width,h/img.height),sw=w/s,sh=h/s,sx=(img.width-sw)/2,sy=(img.height-sh)/2;c.drawImage(img,sx,sy,sw,sh,x,y,w,h)}function loadImg(src){return new Promise(res=>{const i=new Image();i.onload=()=>res(i);i.onerror=()=>res(null);i.src=src})}
-exportPng.addEventListener("click",async()=>{const W=1013,H=638,c=document.createElement("canvas");c.width=W;c.height=H;const g=c.getContext("2d");g.fillStyle="#f7f4ec";g.fillRect(0,0,W,H);g.fillStyle="#10284a";g.fillRect(0,0,W,126);g.fillStyle="#fff";g.font="bold 40px Arial";g.fillText("ONTARIO DECLARATION CARD",42,53);g.fillStyle="#eedba6";g.font="bold 18px Arial";g.fillText("STATUTORY DECLARATION OF IDENTITY & MARITAL STATUS",42,88);const photo=await loadImg(state.photo||placeholderPhoto()),seal=await loadImg(state.seal||placeholderSeal()),sig=await loadImg(state.signature||blankSignature());if(photo)drawImageCover(g,photo,36,154,240,282);g.strokeStyle="#333";g.lineWidth=2;g.beginPath();g.moveTo(36,500);g.lineTo(276,500);g.stroke();g.fillStyle="#555";g.font="15px Arial";g.fillText("Holder signature — sign in ink",43,522);let x=304,y=164;const drawField=(lab,val,lh=25,max=2)=>{g.fillStyle="#455568";g.font="bold 14px Arial";g.fillText(lab.toUpperCase(),x,y);y+=20;g.fillStyle="#111";g.font="bold 20px Arial";wrapText(g,val,x,y,360,lh,max);y+=lh*max+9};drawField("Full legal name",fullName.value,25,2);drawField("Date of birth",fmtDate(dob.value),25,1);drawField("Sex",sex.value,25,1);drawField("Marital status",marital.value,25,2);drawField("Place of birth",birthPlace.value,22,2);drawField("Citizenship",citizenship.value,22,1);drawField("Occupation",occupation.value,20,3);drawField("Residence",address.value,20,3);g.fillStyle="#fff";g.strokeStyle="#768291";g.lineWidth=2;g.fillRect(688,150,292,365);g.strokeRect(688,150,292,365);g.fillStyle="#10284a";g.font="bold 18px Arial";g.fillText("NOTARY / COMMISSIONER",706,177);if(seal)g.drawImage(seal,865,185,90,90);g.fillStyle="#111";g.font="bold 13px Arial";g.fillText("NAME",706,212);g.font="17px Arial";wrapText(g,notaryName.value||" ",706,236,145,20,2);g.font="bold 13px Arial";g.fillText("CAPACITY",706,282);g.font="15px Arial";wrapText(g,capacity.value,706,304,245,18,2);g.font="bold 13px Arial";g.fillText("LICENCE / APPOINTMENT NO.",706,349);g.font="15px Arial";g.fillText(licenceNo.value||"—",706,371);g.font="bold 13px Arial";g.fillText("APPOINTMENT EXPIRY",706,401);g.font="15px Arial";g.fillText(fmtDate(appointmentExpiry.value),706,423);g.font="bold 13px Arial";g.fillText("ISSUE DATE",706,451);g.font="15px Arial";g.fillText(fmtDate(issueDate.value),706,473);if(sig)g.drawImage(sig,700,478,250,60);g.fillStyle="#29333d";g.font="16px Arial";wrapText(g,declarationText.value,35,555,625,20,2);g.fillStyle="#10284a";g.fillRect(0,582,W,56);g.fillStyle="#fff";g.font="bold 15px Arial";g.fillText(cardNo.value,28,615);g.fillStyle="#ffe69c";g.fillText("NOT GOVERNMENT ID",405,615);g.fillStyle="#fff";g.font="13px Arial";g.textAlign="right";g.fillText(expiryText.value,985,615);g.textAlign="left";c.toBlob(b=>download("declaration-card-300dpi.png",b),"image/png")});
+
+async function exportCardAsPng(){
+  const target=$("card"), status=$("exportStatus");
+  status.textContent="Preparing card image…";
+  try{
+    if(document.fonts&&document.fonts.ready) await document.fonts.ready;
+    await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
+    const targetW=1013,targetH=638;
+    const rect=target.getBoundingClientRect();
+    const scale=targetW/rect.width;
+    const canvas=await html2canvas(target,{
+      backgroundColor:null,
+      scale,
+      useCORS:true,
+      allowTaint:false,
+      logging:false,
+      width:rect.width,
+      height:rect.height,
+      scrollX:0,
+      scrollY:-window.scrollY,
+      windowWidth:document.documentElement.clientWidth,
+      windowHeight:document.documentElement.clientHeight
+    });
+    const finalCanvas=document.createElement("canvas");
+    finalCanvas.width=targetW;finalCanvas.height=targetH;
+    const g=finalCanvas.getContext("2d");
+    g.imageSmoothingEnabled=true;g.imageSmoothingQuality="high";
+    g.drawImage(canvas,0,0,targetW,targetH);
+    finalCanvas.toBlob(blob=>{
+      if(!blob)throw new Error("PNG creation failed");
+      download("declaration-card-300dpi.png",blob);
+      status.textContent="Exported 1013 × 638 PNG matching the card preview.";
+    },"image/png");
+  }catch(err){
+    console.error(err);
+    status.textContent="Export failed. Make sure the page is online so the export library can load.";
+    alert("Could not export the card image. Please reload while online and try again.");
+  }
+}
+exportPng.addEventListener("click",exportCardAsPng);
+
 
 const ARCHIVE_KEY="ontarioDeclarationCardArchive.v2";
 function readArchive(){try{return JSON.parse(localStorage.getItem(ARCHIVE_KEY)||"[]")}catch(e){return[]}}
